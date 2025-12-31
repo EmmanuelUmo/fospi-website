@@ -361,11 +361,28 @@
             transform: translate(-50%, -50%);
             min-width: 100%;
             min-height: 100%;
-            width: 100%;
-            height: 100%;
+            width: auto;
+            height: auto;
             object-fit: cover;
             opacity: 0.7; /* Reduced video opacity for better text visibility */
             z-index: 1;
+        }
+        
+        /* Ensure video covers full area on all screen sizes */
+        @media (min-aspect-ratio: 16/9) {
+            .background-video {
+                width: 100%;
+                height: auto;
+                min-height: 100%;
+            }
+        }
+        
+        @media (max-aspect-ratio: 16/9) {
+            .background-video {
+                width: auto;
+                height: 100%;
+                min-width: 100%;
+            }
         }
 
 
@@ -916,219 +933,6 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
-        }
-        /* News Section Styles */
-.news-section {
-    padding: 6rem 0;
-    background: #f8fafc;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.news-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* News Sidebar */
-.news-sidebar {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-}
-
-.news-widget {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.news-widget h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.news-ticker {
-    background: #f8fafc;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.ticker-item {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-.ticker-item:last-child {
-    border-bottom: none;
-}
-
-.ticker-item:hover {
-    color: var(--primary-color);
-    cursor: pointer;
-}
-
-.see-more-link {
-    display: block;
-    text-align: center;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.see-more-link:hover {
-    background: rgba(30, 119, 18, 0.1);
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-/* News Sources */
-.news-sources {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.news-sources h4 {
-    color: var(--dark-color);
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.sources-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.source-tag {
-    background: rgba(30, 119, 18, 0.1);
-    color: var(--primary-color);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-/* News Feed */
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.news-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    height: 100%;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.news-image {
-    height: 180px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    background-size: cover;
-    background-position: center;
-}
-
-.news-content {
-    padding: 1.5rem;
-}
-
-.news-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
-    line-height: 1.4;
-    color: var(--dark-color);
-}
-
-.news-content p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-}
-
-.news-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    color: var(--text-light);
-}
-
-.news-source {
-    background: rgba(245, 158, 11, 0.1);
-    color: var(--secondary-color);
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-.news-footer {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.news-note {
-    margin-top: 1rem;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-/* Responsive News Layout */
-@media (max-width: 1024px) {
-    .news-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .news-sidebar {
-        position: static;
-    }
-    
-    .news-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .news-section {
-        padding: 4rem 0;
-    }
 }
 
         /* Animations */
@@ -1500,8 +1304,8 @@
         </div>
     </section>
 
-      <!-- Impact Section -->
-      <section class="impact-section scroll-animate" id="impact">
+    <!-- Impact Section -->
+    <section class="impact-section scroll-animate" id="impact">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Our Focus Areas</h2>
@@ -1590,7 +1394,7 @@
                 
                 <a href="./report.html" class="btn-primary">View Full Report</a>
             </div>
-
+            
             <!-- 2025 Report Content -->
             <div class="report-content" id="report2025">
                 <h2>2025 Annual Impact Report</h2>
@@ -1606,8 +1410,8 @@
                 </ul>
                 
                 <a href="./report.html" class="btn-primary">View Full Report</a>
-            </div>
-
+        </div>
+        
             <!-- 2026 Report Content -->
             <div class="report-content hidden" id="report2026">
                 <h2>2026 Annual Impact Goals</h2>
@@ -1629,63 +1433,12 @@
                 <span class="big-number" id="reportStat">400+</span>
                 <p>Transparency Promise</p>
                 <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Every naira donated goes directly to our programs. No administrative overhead fees.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- News Updates Section -->
-<!-- <section class="news-section scroll-animate" id="news">
-    <div class="section-container">
-        <div class="section-header">
-            <h2 class="section-title">Latest News & Updates</h2>
-            <p class="section-subtitle">Stay informed about development, humanitarian work, and community initiatives in Nigeria and beyond.</p>
-        </div>
-        
-        <div class="news-container">
-            
-            <div class="news-sidebar">
-                <div class="news-widget">
-                    <h3><i class="icon">📰</i> Trending Updates</h3>
-                    <div class="news-ticker" id="newsTicker">
-                        News items will load here
-                        <div class="ticker-item">Loading news...</div>
-                    </div>
-                    <a href="#all-news" class="see-more-link">See All Updates →</a>
-                </div>
-                
-                <div class="news-sources">
-                    <h4>Sources We Follow:</h4>
-                    <div class="sources-list">
-                        <span class="source-tag">UN News</span>
-                        <span class="source-tag">WHO Updates</span>
-                        <span class="source-tag">Nigeria Health Watch</span>
-                        <span class="source-tag">Development News</span>
-                    </div>
-                </div>
-            </div>
-            
-            News Feed
-            <div class="news-feed">
-                <div class="news-grid" id="newsGrid">
-                    News cards will load here
-                    <div class="news-card loading">
-                        <div class="news-image"></div>
-                        <div class="news-content">
-                            <h3>Loading News Updates...</h3>
-                            <p>Fetching the latest development news...</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="news-footer">
-                    <a href="./news.html" class="btn-primary">Visit Our News Hub</a>
-                    <p class="news-note">Curated news from trusted development sources</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
+</section>
+
+<!-- News Updates Section -->
 
 <!-- Call to Action Section with Background Image -->
 <section class="action-section scroll-animate" id="donate">
@@ -2232,378 +1985,47 @@ partnerInquiry.addEventListener('submit', function(e) {
     // Video background optimization
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
-        // Log video loading status
-        console.log('Video element found:', heroVideo);
+        // Set video source and ensure it loads
+        heroVideo.load();
         
-        // Check if video source loads
-        heroVideo.addEventListener('loadstart', function() {
-            console.log('Video loading started');
-        });
-        
-        heroVideo.addEventListener('loadeddata', function() {
-            console.log('Video data loaded');
-        });
-        
-        heroVideo.addEventListener('error', function(e) {
-            console.error('Video error:', e);
-            console.error('Video error code:', heroVideo.error ? heroVideo.error.code : 'unknown');
-            console.error('Video source:', heroVideo.querySelector('source')?.src);
-        });
-        
-        // Ensure video plays correctly
-        heroVideo.addEventListener('loadedmetadata', function() {
-            console.log('Video metadata loaded, attempting to play');
-            this.play().catch(e => {
-                console.log('Video autoplay prevented:', e);
-            });
-        });
-
-        // Fallback for browsers that block autoplay
+        // Ensure video plays when ready
         const playVideo = () => {
-            if (heroVideo && heroVideo.paused) {
+            if (heroVideo && heroVideo.readyState >= 2) {
                 heroVideo.play().catch(e => {
-                    console.log('Video play failed:', e);
+                    // Autoplay may be blocked - will try on user interaction
                 });
             }
         };
 
-        // Try to play on user interaction
-        document.addEventListener('click', playVideo, { once: true });
-        document.addEventListener('touchstart', playVideo, { once: true });
-        document.addEventListener('scroll', playVideo, { once: true });
+        // Try to play when video can play
+        heroVideo.addEventListener('canplay', playVideo);
+        heroVideo.addEventListener('canplaythrough', playVideo);
+        heroVideo.addEventListener('loadeddata', playVideo);
         
-        // Force play after a short delay
-        setTimeout(() => {
+        // Fallback: Try to play on user interaction
+        const tryPlay = () => {
             if (heroVideo.paused) {
-                playVideo();
+                heroVideo.play().catch(() => {});
             }
-        }, 500);
-    } else {
-        console.error('Video element not found!');
-    }
-
-    // ==================== NEWS SYSTEM WITH REAL IMAGES ====================
-// ==================== REAL-TIME NEWS SYSTEM ====================
-
-// Main function to fetch REAL news from RSS feeds
-async function fetchRealNews() {
-    try {
-        // Array of RSS feeds for development/humanitarian news
-        const rssFeeds = [
-            {
-                name: "UN News",
-                url: "https://news.un.org/feed/subscribe/en/news/region/africa/rss.xml",
-                category: "Development"
-            },
-            {
-                name: "WHO Africa",
-                url: "https://www.who.int/feeds/entity/afro/en/rss.xml",
-                category: "Health"
-            },
-            {
-                name: "ReliefWeb",
-                url: "https://reliefweb.int/updates/rss.xml",
-                category: "Humanitarian"
-            },
-            {
-                name: "Devex",
-                url: "https://www.devex.com/news/rss",
-                category: "Development"
-            }
-        ];
+        };
         
-        let allNews = [];
+        document.addEventListener('click', tryPlay, { once: true });
+        document.addEventListener('touchstart', tryPlay, { once: true });
+        document.addEventListener('scroll', tryPlay, { once: true });
         
-        // Try to fetch from each RSS feed
-        for (const feed of rssFeeds) {
-            try {
-                const newsFromFeed = await fetchRSSFeed(feed);
-                allNews = [...allNews, ...newsFromFeed];
-            } catch (error) {
-                console.log(`Could not fetch from ${feed.name}:`, error);
-            }
-        }
-        
-        // If we got real news, display it
-        if (allNews.length > 0) {
-            // Sort by date (newest first)
-            allNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-            // Take only latest 6-8 items
-            const latestNews = allNews.slice(0, 8);
-            displayNews(latestNews);
-            
-            // Store in localStorage with timestamp
-            localStorage.setItem('fospi_news', JSON.stringify({
-                data: latestNews,
-                timestamp: Date.now()
-            }));
-        } else {
-            // Fallback to cached or mock data
-            loadCachedNews();
-        }
-        
-    } catch (error) {
-        console.error('Error fetching real news:', error);
-        loadCachedNews();
-    }
-}
-
-// Function to fetch from a single RSS feed
-async function fetchRSSFeed(feed) {
-    try {
-        // Use CORS proxy to avoid browser restrictions
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(`${proxyUrl}${encodeURIComponent(feed.url)}`);
-        const text = await response.text();
-        
-        // Parse RSS XML
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(text, 'text/xml');
-        const items = xml.querySelectorAll('item');
-        
-        const newsItems = [];
-        
-        items.forEach(item => {
-            const title = item.querySelector('title')?.textContent || '';
-            const description = item.querySelector('description')?.textContent || '';
-            const link = item.querySelector('link')?.textContent || '';
-            const pubDate = item.querySelector('pubDate')?.textContent || '';
-            const category = item.querySelector('category')?.textContent || feed.category;
-            
-            // Extract image from description or use default
-            const image = extractImageFromRSS(description) || getDefaultImageByCategory(category);
-            
-            // Only include if it's recent (last 7 days)
-            const newsDate = new Date(pubDate);
-            const sevenDaysAgo = new Date();
-            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-            
-            if (newsDate > sevenDaysAgo) {
-                newsItems.push({
-                    title: cleanText(title),
-                    description: cleanText(description).substring(0, 120) + '...',
-                    source: feed.name,
-                    date: formatRelativeTime(pubDate),
-                    link: link,
-                    image: image,
-                    category: category,
-                    pubDate: pubDate
-                });
-            }
+        // Force play after page loads
+        window.addEventListener('load', () => {
+            setTimeout(playVideo, 300);
         });
         
-        return newsItems;
-        
-    } catch (error) {
-        console.error(`Error parsing ${feed.name} RSS:`, error);
-        return [];
-    }
-}
-
-// Extract image from RSS description
-function extractImageFromRSS(description) {
-    if (!description) return null;
-    
-    // Try to find image URL
-    const imgRegex = /<img[^>]+src="([^">]+)"/i;
-    const match = description.match(imgRegex);
-    
-    if (match && match[1]) {
-        return match[1];
-    }
-    
-    // Try other patterns
-    const srcRegex = /src="([^"]+)"/i;
-    const srcMatch = description.match(srcRegex);
-    
-    return srcMatch ? srcMatch[1] : null;
-}
-
-// Get default image based on category
-function getDefaultImageByCategory(category) {
-    const categoryImages = {
-        'Health': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-        'Education': 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-        'Humanitarian': 'https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-        'Development': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-        'Food Security': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-        'default': 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-    };
-    
-    return categoryImages[category] || categoryImages.default;
-}
-
-// Load cached news if available
-function loadCachedNews() {
-    const cached = localStorage.getItem('fospi_news');
-    
-    if (cached) {
-        const { data, timestamp } = JSON.parse(cached);
-        
-        // If cache is less than 2 hours old, use it
-        if (Date.now() - timestamp < 2 * 60 * 60 * 1000) {
-            displayNews(data);
-            return;
-        }
-    }
-    
-    // Otherwise use fallback
-    displayFallbackNews();
-}
-
-// Format date to relative time (e.g., "2 hours ago")
-function formatRelativeTime(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now - date;
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    
-    if (diffHours < 1) return 'Just now';
-    if (diffHours < 24) return `${diffHours} hours ago`;
-    
-    const diffDays = Math.floor(diffHours / 24);
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays < 7) return `${diffDays} days ago`;
-    
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-// Clean text (remove HTML tags)
-function cleanText(text) {
-    if (!text) return '';
-    return text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '');
-}
-
-// Display news on the page
-function displayNews(newsItems) {
-    const newsGrid = document.getElementById('newsGrid');
-    const newsTicker = document.getElementById('newsTicker');
-    
-    if (!newsGrid || !newsTicker) return;
-    
-    // Clear loading state
-    newsGrid.innerHTML = '';
-    newsTicker.innerHTML = '';
-    
-    // Display news cards
-    newsItems.forEach((item, index) => {
-        // Create news card
-        const newsCard = document.createElement('div');
-        newsCard.className = 'news-card';
-        newsCard.innerHTML = `
-            <div class="news-image" style="background-image: url('${item.image}');">
-                <div class="image-overlay"></div>
-                <div class="news-category">${item.category}</div>
-            </div>
-            <div class="news-content">
-                <h3>${item.title}</h3>
-                <p>${item.description}</p>
-                <div class="news-meta">
-                    <span class="news-source">${item.source}</span>
-                    <span>${item.date}</span>
-                </div>
-            </div>
-        `;
-        
-        // Make card clickable
-        newsCard.style.cursor = 'pointer';
-        newsCard.addEventListener('click', () => {
-            window.open(item.link, '_blank');
+        // Ensure video stays playing
+        heroVideo.addEventListener('pause', () => {
+            if (!document.hidden) {
+                heroVideo.play().catch(() => {});
+            }
         });
-        
-        newsGrid.appendChild(newsCard);
-        
-        // Add to ticker (first 3 items)
-        if (index < 3) {
-            const tickerItem = document.createElement('div');
-            tickerItem.className = 'ticker-item';
-            tickerItem.textContent = `${item.title} (${item.source})`;
-            tickerItem.addEventListener('click', () => {
-                window.open(item.link, '_blank');
-            });
-            newsTicker.appendChild(tickerItem);
-        }
-    });
-    
-    // Show last updated time
-    updateLastRefreshedTime();
-}
-
-// Update "Last refreshed" time
-function updateLastRefreshedTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: true 
-    });
-    
-    // You can add this to your news section if you want
-    console.log(`News last updated: ${timeString}`);
-}
-
-// Show fallback if news fails to load
-function displayFallbackNews() {
-    const newsGrid = document.getElementById('newsGrid');
-    if (!newsGrid) return;
-    
-    // Use cached curated news as fallback
-    const fallbackNews = [
-        {
-            title: "Latest Development Updates",
-            description: "Stay informed about humanitarian work and community initiatives across Nigeria.",
-            source: "FOSPI Updates",
-            date: "Recently",
-            link: "#",
-            image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-            category: "Updates"
-        }
-    ];
-    
-    displayNews(fallbackNews);
-}
-
-// Check for new news when page becomes visible
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        // Page became visible, refresh news if it's been a while
-        const cached = localStorage.getItem('fospi_news');
-        if (cached) {
-            const { timestamp } = JSON.parse(cached);
-            if (Date.now() - timestamp > 30 * 60 * 1000) { // 30 minutes
-                fetchRealNews();
-            }
-        }
     }
-});
 
-// ==================== END REAL-TIME NEWS SYSTEM ====================
-
-// Initialize news on page load
-document.addEventListener('DOMContentLoaded', () => {
-    fetchRealNews(); // Load real news immediately
-    
-    // Refresh news every 30 minutes
-    setInterval(fetchRealNews, 30 * 60 * 1000);
-    
-    // Also refresh when user comes back to tab
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-            const cached = localStorage.getItem('fospi_news');
-            if (cached) {
-                const { timestamp } = JSON.parse(cached);
-                // Refresh if data is more than 1 hour old
-                if (Date.now() - timestamp > 60 * 60 * 1000) {
-                    fetchRealNews();
-                }
-            }
-        }
-    });
-});
-
-    // ==================== END NEWS SYSTEM ====================
-
-    // Note: News initialization is handled above in the REAL-TIME NEWS SYSTEM section
 
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -2662,21 +2084,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (year === '2026') {
                 report2026.classList.remove('hidden');
                 reportStat.textContent = '10,000+';
-            }
-        });
+        }
     });
-    
-    // Debug: Check if action section exists and has background
-    const actionSection = document.querySelector('.action-section');
-    if (actionSection) {
-        console.log('Action section found, checking computed styles...');
-        const computedStyle = window.getComputedStyle(actionSection);
-        console.log('Background image URL:', computedStyle.backgroundImage);
-        console.log('Background size:', computedStyle.backgroundSize);
-        console.log('Background position:', computedStyle.backgroundPosition);
-    } else {
-        console.error('Action section not found!');
-    }
+});
+
 </script>
 </body>
 </html>
