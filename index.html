@@ -364,24 +364,41 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            opacity: 0.7; /* Reduced video opacity for better text visibility */
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        /* YouTube iframe background - Fully responsive */
+        .youtube-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-width: 177.77777778vh; /* 16:9 aspect ratio based on height */
+            min-height: 100vh;
+            border: none;
+            opacity: 0.7;
+            pointer-events: none;
             z-index: 1;
         }
         
-        /* Ensure video covers full area on all screen sizes */
+        /* For wider screens (landscape) */
         @media (min-aspect-ratio: 16/9) {
-            .background-video {
-                width: 100%;
-                height: auto;
-                min-height: 100%;
+            .youtube-background {
+                width: 100vw;
+                height: 56.25vw;
+                min-height: 100vh;
             }
         }
         
+        /* For taller screens (portrait/mobile) */
         @media (max-aspect-ratio: 16/9) {
-            .background-video {
-                width: auto;
-                height: 100%;
-                min-width: 100%;
+            .youtube-background {
+                width: 177.77777778vh;
+                height: 100vh;
+                min-width: 100vw;
             }
         }
 
@@ -1062,10 +1079,25 @@
             }
 
             /* Video background optimizations for mobile */
-            .background-video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+            .background-video,
+            .youtube-background {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100vw !important;
+                height: 56.25vw !important;
+                min-width: 177.77777778vh !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Portrait mobile devices */
+            @media (max-aspect-ratio: 16/9) {
+                .youtube-background {
+                    width: 177.77777778vh !important;
+                    height: 100vh !important;
+                    min-width: 100vw !important;
+                }
             }
 
             /* Slightly darker overlay on mobile for better text readability */
@@ -1074,7 +1106,8 @@
             }
 
             /* Slightly more opacity reduction on mobile for better text visibility */
-            .background-video {
+            .background-video,
+            .youtube-background {
                 opacity: 0.6;
             }
 
@@ -1200,7 +1233,8 @@
             }
             
             /* Stop video autoplay for reduced motion preference */
-            .background-video {
+            .background-video,
+            .youtube-background {
                 display: none;
             }
 
@@ -1271,22 +1305,16 @@
     <section class="hero" role="banner">
         <!-- Video Background Container -->
         <div class="video-background">
-            <!-- VIDEO TAG: Add your video file here -->
-            <video 
-                class="background-video" 
-                autoplay 
-                muted 
-                loop 
-                playsinline 
-                preload="auto"
-                aria-hidden="true" 
+            <!-- YouTube Video Background -->
+            <iframe 
+                class="youtube-background" 
                 id="hero-video"
-            >
-                <!-- Add your video sources here -->
-                <source src="./images/video/landing_page_video.mp4" type="video/mp4">
-                <!-- Add fallback text for browsers that don't support video -->
-                Your browser does not support the video tag.
-            </video>
+                src="https://www.youtube.com/embed/Vj9vE8rrHtk?autoplay=1&mute=1&loop=1&playlist=Vj9vE8rrHtk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&start=0"
+                allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture"
+                allowfullscreen
+                aria-hidden="true"
+                frameborder="0"
+            ></iframe>
             
             <!-- Video overlay changed from green to black -->
             <div class="video-overlay"></div>
@@ -1982,48 +2010,83 @@ partnerInquiry.addEventListener('submit', function(e) {
         observer2.observe(el);
     });
 
-    // Video background optimization
+    // YouTube video background optimization
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
-        // Set video source and ensure it loads
-        heroVideo.load();
+        // Load YouTube IFrame API for better control
+        let ytPlayer;
+        let apiReady = false;
         
-        // Ensure video plays when ready
-        const playVideo = () => {
-            if (heroVideo && heroVideo.readyState >= 2) {
-                heroVideo.play().catch(e => {
-                    // Autoplay may be blocked - will try on user interaction
-                });
+        // Load YouTube IFrame API
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Initialize YouTube player when API is ready
+        window.onYouTubeIframeAPIReady = function() {
+            apiReady = true;
+            ytPlayer = new YT.Player('hero-video', {
+                videoId: 'Vj9vE8rrHtk',
+                playerVars: {
+                    'autoplay': 1,
+                    'mute': 1,
+                    'loop': 1,
+                    'playlist': 'Vj9vE8rrHtk',
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'playsinline': 1,
+                    'iv_load_policy': 3,
+                    'start': 0
+                },
+                events: {
+                    'onReady': function(event) {
+                        event.target.playVideo();
+                        event.target.mute();
+                    },
+                    'onStateChange': function(event) {
+                        if (event.data === YT.PlayerState.ENDED) {
+                            event.target.playVideo();
+                        }
+                        if (event.data === YT.PlayerState.PAUSED) {
+                            event.target.playVideo();
+                        }
+                    }
+                }
+            });
+        };
+
+        // Fallback: Try to play on user interaction
+        const tryPlay = () => {
+            if (apiReady && ytPlayer) {
+                try {
+                    ytPlayer.playVideo();
+                    ytPlayer.mute();
+                } catch (e) {
+                    // Silently handle errors
+                }
             }
         };
 
-        // Try to play when video can play
-        heroVideo.addEventListener('canplay', playVideo);
-        heroVideo.addEventListener('canplaythrough', playVideo);
-        heroVideo.addEventListener('loadeddata', playVideo);
-        
-        // Fallback: Try to play on user interaction
-        const tryPlay = () => {
-            if (heroVideo.paused) {
-                heroVideo.play().catch(() => {});
-            }
-        };
-        
         document.addEventListener('click', tryPlay, { once: true });
         document.addEventListener('touchstart', tryPlay, { once: true });
         document.addEventListener('scroll', tryPlay, { once: true });
         
-        // Force play after page loads
-        window.addEventListener('load', () => {
-            setTimeout(playVideo, 300);
-        });
-        
-        // Ensure video stays playing
-        heroVideo.addEventListener('pause', () => {
-            if (!document.hidden) {
-                heroVideo.play().catch(() => {});
+        // Periodic check to ensure video is playing
+        setInterval(() => {
+            if (apiReady && ytPlayer) {
+                try {
+                    const state = ytPlayer.getPlayerState();
+                    if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
+                        ytPlayer.playVideo();
+                    }
+                } catch (e) {
+                    // Silently handle errors
+                }
             }
-        });
+        }, 5000);
     }
 
 
