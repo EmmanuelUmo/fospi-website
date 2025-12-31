@@ -1,0 +1,2676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSPI Foundation - Building Hope Where It's Needed Most</title>
+    <meta name="description" content="Empowering underserved communities in Nigeria through evidence-based programs in education, mental health, and poverty alleviation.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e7712;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --danger-color: #ef4444;
+            --hero-green-start: #2d5a3d;
+            --hero-green-mid: #1a3d2e;
+            --hero-navy-dark: #0f1419;
+            --hero-navy-deep: #0a0e13;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .donate-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            z-index: 1001;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1002;
+            position: relative;
+            width: 35px;
+            height: 35px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
+        }
+
+        .mobile-menu span:nth-child(1) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu span:nth-child(2) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu span:nth-child(3) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background: var(--primary-color);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+            background: var(--primary-color);
+        }
+
+        /* Hover effect for mobile menu */
+        .mobile-menu:hover span {
+            background: var(--primary-color);
+        }
+
+        .mobile-menu:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Navigation Dropdown */
+        .mobile-nav-dropdown {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: white;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-nav-dropdown.active {
+            right: 0;
+        }
+
+        .mobile-nav-content {
+            padding: 2rem;
+        }
+
+        .mobile-nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-menu li {
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(5) { transition-delay: 0.5s; }
+
+        .mobile-nav-menu a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover::before {
+            width: 20px;
+        }
+
+        .mobile-donate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 6px 20px rgba(30, 119, 18, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-nav-dropdown.active .mobile-donate-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+
+        .mobile-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 119, 18, 0.4);
+        }
+
+        .mobile-nav-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-footer {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .contact-info strong {
+            color: var(--text-dark);
+        }
+
+        /* Hero Section - Modified for video background with black overlay */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px; /* Account for fixed header */
+            background: #000; /* Black fallback background */
+        }
+
+        /* Video background container */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.7; /* Reduced video opacity for better text visibility */
+        }
+
+        /* Video overlay - Changed from green to black */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Black overlay with transparency */
+            z-index: 2;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 3; /* Above video and overlay */
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease-out;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Enhanced text shadow for better contrast */
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s both;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* Enhanced text shadow */
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Hero visual removed - stats card hidden */
+        .hero-visual {
+            display: none;
+        }
+
+        .stats-card {
+            display: none;
+        }
+
+        /* Impact Section with Image Icons */
+        .impact-section {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .impact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+.impact-icon {
+    width: 100%;
+    height: 180px;
+    background: var(--primary-color);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.impact-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill the container */
+    border-radius: 15px;
+}
+
+        .impact-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .impact-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Annual Report Section */
+        .report-section {
+            padding: 6rem 0;
+            background: var(--dark-color);
+            color: white;
+            position: relative;
+        }
+
+        .report-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .report-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-highlights {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .report-highlights li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .report-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .report-visual {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .big-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Year Toggle Switch */
+        .year-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .year-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .year-toggle-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .year-toggle-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .year-toggle-btn:hover {
+            color: white;
+        }
+
+        .report-content {
+            transition: opacity 0.3s ease;
+        }
+
+        .report-content.hidden {
+            display: none;
+        }
+
+        /* Action Section with Background Image - FIXED */
+        .action-section {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            background-image: url('./images/Test/IMG_20241227_105200_772.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            color: white;
+            /* Fallback color if image doesn't load */
+            background-color: #1a3d2e;
+        }
+
+        /* Dark overlay for better text readability */
+        .action-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Increased opacity for better readability */
+            z-index: 1;
+        }
+
+        .action-section .section-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .action-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .action-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        /* Form Styles with Brand Colors */
+        .form-container {
+            display: none;
+            max-width: 600px;
+            margin: 2rem auto 0;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--primary-color);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.2rem 2rem;
+            border-radius: 10px 10px 0 0;
+            margin: -2rem -2rem 2rem -2rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(30, 119, 18, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%231e7712' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        /* Checkbox and Radio Styles */
+        .form-checkbox-group,
+        .form-radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label,
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .form-checkbox,
+        .form-radio {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .form-checkbox:focus,
+        .form-radio:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Submit Button */
+        .form-submit {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .form-submit:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 119, 18, 0.4);
+        }
+
+        /* Form Grid Layout */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Animation for form slide down */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quick Impact Info */
+        .quick-impact {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.9;
+        }
+
+        .quick-impact p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .quick-impact strong {
+            color: var(--secondary-color);
+        }
+
+
+  /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        /* News Section Styles */
+.news-section {
+    padding: 6rem 0;
+    background: #f8fafc;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* News Sidebar */
+.news-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.news-widget {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-widget h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.news-ticker {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.ticker-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.ticker-item:last-child {
+    border-bottom: none;
+}
+
+.ticker-item:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.see-more-link {
+    display: block;
+    text-align: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.see-more-link:hover {
+    background: rgba(30, 119, 18, 0.1);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* News Sources */
+.news-sources {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-sources h4 {
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.sources-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.source-tag {
+    background: rgba(30, 119, 18, 0.1);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* News Feed */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.news-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.news-image {
+    height: 180px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background-size: cover;
+    background-position: center;
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    color: var(--dark-color);
+}
+
+.news-content p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.news-source {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--secondary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.news-footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.news-note {
+    margin-top: 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Responsive News Layout */
+@media (max-width: 1024px) {
+    .news-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .news-sidebar {
+        position: static;
+    }
+    
+    .news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .news-section {
+        padding: 4rem 0;
+    }
+}
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-nav-dropdown {
+                width: 100%;
+                right: -100%;
+            }
+
+            .hero {
+                min-height: 100vh;
+                padding-top: 80px;
+                padding-bottom: 2rem;
+            }
+
+            .hero-container {
+                padding: 2rem 2rem 3rem 2rem;
+                min-height: calc(100vh - 80px);
+                justify-content: center;
+            }
+
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                max-width: 90%;
+            }
+
+            .hero-cta {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .hero-cta .btn-primary,
+            .hero-cta .btn-secondary {
+                width: 80%;
+                max-width: 250px;
+                text-align: center;
+            }
+
+            .report-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .impact-section {
+                padding: 4rem 0;
+            }
+
+            .report-section {
+                padding: 4rem 0;
+            }
+
+            .action-section {
+                padding: 4rem 0;
+                background-attachment: scroll; /* Disable parallax on mobile for performance */
+            }
+
+            /* Video background optimizations for mobile */
+            .background-video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Slightly darker overlay on mobile for better text readability */
+            .video-overlay {
+                background: rgba(0, 0, 0, 0.5);
+            }
+
+            /* Slightly more opacity reduction on mobile for better text visibility */
+            .background-video {
+                opacity: 0.6;
+            }
+
+            /* Form responsive adjustments */
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+                margin: 1rem auto 0;
+            }
+
+            .form-header {
+                padding: 1rem 1.5rem;
+                margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-container {
+                padding: 1.5rem 1rem 2rem 1rem;
+                gap: 2rem;
+            }
+
+            .hero-cta .btn-primary,
+            .hero-cta .btn-secondary {
+                width: 90%;
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .action-section h2 {
+                font-size: 2rem;
+            }
+
+            .action-section p {
+                font-size: 1rem;
+            }
+
+            .form-container {
+                padding: 1rem;
+            }
+
+            .form-header {
+                padding: 0.8rem 1rem;
+                font-size: 1.1rem;
+                margin: -1rem -1rem 1rem -1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles for accessibility */
+        .btn-primary:focus,
+        .btn-secondary:focus,
+        .donate-btn:focus,
+        .mobile-menu:focus,
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus,
+        .form-checkbox:focus,
+        .form-radio:focus,
+        .form-submit:focus {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #056110;
+                --secondary-color: #ff6600;
+                --text-dark: #000000;
+            }
+
+            .form-input,
+            .form-textarea,
+            .form-select {
+                border-width: 3px;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            /* Stop video autoplay for reduced motion preference */
+            .background-video {
+                display: none;
+            }
+
+            /* Disable parallax effect */
+            .action-section {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Body scroll lock when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <a href="./index.html" class="logo" aria-label="FOSPI Foundation Home">FOSPI</a>
+            
+            <ul class="nav-menu">
+                <li><a href="./about.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./programs.html">Programs</a></li>
+                <li><a href="./impact.html">Impact</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+            
+            <a href="./donate.html" class="donate-btn" aria-label="Donate to FOSPI Foundation">Donate Now</a>
+            
+            <button class="mobile-menu" aria-label="Toggle mobile navigation" aria-expanded="false" type="button">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay"></div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div class="mobile-nav-dropdown">
+            <div class="mobile-nav-content">
+                <ul class="mobile-nav-menu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./programs.html">Our Programs</a></li>
+                    <li><a href="./impact.html">Our Impact</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                
+                <a href="./donate.html" class="mobile-donate-btn">Donate Now</a>
+                
+                <div class="mobile-nav-footer">
+                    <div class="contact-info">
+                        <strong>Contact Us</strong><br>
+                        4 Umuozu Close, Garki 2, Abuja<br>
+                        📞 08035515287<br>
+                        ✉️ contact@fospifoundation.org
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" role="banner">
+        <!-- Video Background Container -->
+        <div class="video-background">
+            <!-- VIDEO TAG: Add your video file here -->
+            <video 
+                class="background-video" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                aria-hidden="true" 
+                poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                id="hero-video"
+            >
+                <!-- Add your video sources here -->
+                <!-- Example: <source src="your-video.mp4" type="video/mp4"> -->
+                <!-- Example: <source src="your-video.webm" type="video/webm"> -->
+                <source src="vid/0909 (3)(1).mp4" type="video/mp4">
+                <!-- Add fallback text for browsers that don't support video -->
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Video overlay changed from green to black -->
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Building Hope Where It's Needed Most</h1>
+                <p>Empowering underserved communities in Nigeria through evidence-based programs in education, mental health, and poverty alleviation.</p>
+                <div class="hero-cta">
+                    <a href="./donate.html" class="btn-primary">Support Our Mission</a>
+                    <a href="./impact.html" class="btn-secondary">See Our Impact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Impact Section -->
+      <section class="impact-section scroll-animate" id="impact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Our Focus Areas</h2>
+                <p class="section-subtitle">We implement data-driven, evidence-based programs across five critical areas to create lasting change in underserved communities.</p>
+            </div>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/m 68.webp" alt="Education - International Girls in ICT Day 2025" loading="lazy">
+                    </div>
+                    <h3>Education</h3>
+                    <p>Increasing access to quality education for marginalized communities through scholarships, school rehabilitation, and transportation funding.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/EmptyName.webp" alt="Mental Health - Mental Health Awareness" loading="lazy">
+                    </div>
+                    <h3>Mental Health</h3>
+                    <p>Advocating for mental health awareness and providing access to affordable counseling services and support systems.</p>
+                </div>
+
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/IMG_2037.jpg" alt="Mental Health - Mental Health Awareness" loading="lazy">
+
+                    </div>
+                    <h3>Gender Equity</h3>
+                    <p>Promoting gender equality through vocational training, economic opportunities for women, and leadership development programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/research.webp" alt="Health & Wellbeing - Medical cross" loading="lazy">
+                    </div>
+                    <h3>Health & Wellbeing</h3>
+                    <p>Improving health outcomes through healthcare facility support, medical supplies, and community health education programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/hunger.webp" alt="Poverty & Hunger - Food and community support" loading="lazy">
+                    </div>
+                    <h3>Poverty & Hunger</h3>
+                    <p>Alleviating poverty through emergency food relief, micro-loans for women, and sustainable livelihood programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/index/Fospi 100.webp" alt="Research & Evaluation - Data analysis" loading="lazy">
+                    </div>
+                    <h3>Research & Evaluation</h3>
+                    <p>Conducting empirical research and needs assessments to ensure our interventions are effective and evidence-based.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Annual Report Section -->
+<section class="report-section scroll-animate">
+    <div class="section-container">
+        <!-- Year Toggle -->
+        <div class="year-toggle-container">
+            <div class="year-toggle">
+                <button class="year-toggle-btn" data-year="2024">2024 Report</button>
+                <button class="year-toggle-btn active" data-year="2025">2025 Report</button>
+                <button class="year-toggle-btn" data-year="2026">2026 Goals</button>
+            </div>
+        </div>
+
+        <div class="report-container">
+            <!-- 2024 Report Content -->
+            <div class="report-content hidden" id="report2024">
+                <h2>2024 Annual Impact Report</h2>
+                <p>Our evidence-based approach delivered measurable results across rural Nigerian communities, creating lasting change where it's needed most.</p>
+                
+                <ul class="report-highlights">
+                    <li>2,000+ free meals served during Christmas Drive</li>
+                    <li>125 free counseling sessions provided</li>
+                    <li>Essential materials distributed to hundreds</li>
+                    <li>30+ community interviews and assessments conducted</li>
+                    <li>100% of donations directly funded outreach activities</li>
+                </ul>
+                
+                <a href="./report.html" class="btn-primary">View Full Report</a>
+            </div>
+
+            <!-- 2025 Report Content -->
+            <div class="report-content" id="report2025">
+                <h2>2025 Annual Impact Report</h2>
+                <p>Building on our 2024 success, we've expanded our reach and deepened our impact across more communities in Nigeria, continuing our mission of creating lasting positive change.</p>
+                
+                <ul class="report-highlights">
+                    <li>5,000+ meals provided through Christmas Feeding Drive</li>
+                    <li>100+ counseling sessions delivered to those in need</li>
+                    <li>78 girls empowered through technology training</li>
+                    <li>160+ health beneficiaries served with free medical care</li>
+                    <li>400+ lives transformed through our comprehensive programs</li>
+                    <li>100% of donations directly funded outreach activities</li>
+                </ul>
+                
+                <a href="./report.html" class="btn-primary">View Full Report</a>
+            </div>
+
+            <!-- 2026 Report Content -->
+            <div class="report-content hidden" id="report2026">
+                <h2>2026 Annual Impact Goals</h2>
+                <p>Continuing our momentum, we're setting ambitious goals for 2026 to reach even more communities and create sustainable, transformative change across Nigeria.</p>
+                
+                <ul class="report-highlights">
+                    <li>Expanding programs to reach 10,000+ beneficiaries</li>
+                    <li>Launching new technology training centers</li>
+                    <li>Strengthening mental health support networks</li>
+                    <li>Building strategic partnerships for greater impact</li>
+                    <li>Implementing innovative community development initiatives</li>
+                    <li>100% of donations directly funded outreach activities</li>
+                </ul>
+                
+                <a href="./report.html" class="btn-primary">View Our Goals</a>
+            </div>
+            
+            <div class="report-visual">
+                <span class="big-number" id="reportStat">400+</span>
+                <p>Transparency Promise</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Every naira donated goes directly to our programs. No administrative overhead fees.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News Updates Section -->
+<!-- <section class="news-section scroll-animate" id="news">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Latest News & Updates</h2>
+            <p class="section-subtitle">Stay informed about development, humanitarian work, and community initiatives in Nigeria and beyond.</p>
+        </div>
+        
+        <div class="news-container">
+            
+            <div class="news-sidebar">
+                <div class="news-widget">
+                    <h3><i class="icon">📰</i> Trending Updates</h3>
+                    <div class="news-ticker" id="newsTicker">
+                        News items will load here
+                        <div class="ticker-item">Loading news...</div>
+                    </div>
+                    <a href="#all-news" class="see-more-link">See All Updates →</a>
+                </div>
+                
+                <div class="news-sources">
+                    <h4>Sources We Follow:</h4>
+                    <div class="sources-list">
+                        <span class="source-tag">UN News</span>
+                        <span class="source-tag">WHO Updates</span>
+                        <span class="source-tag">Nigeria Health Watch</span>
+                        <span class="source-tag">Development News</span>
+                    </div>
+                </div>
+            </div>
+            
+            News Feed
+            <div class="news-feed">
+                <div class="news-grid" id="newsGrid">
+                    News cards will load here
+                    <div class="news-card loading">
+                        <div class="news-image"></div>
+                        <div class="news-content">
+                            <h3>Loading News Updates...</h3>
+                            <p>Fetching the latest development news...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-footer">
+                    <a href="./news.html" class="btn-primary">Visit Our News Hub</a>
+                    <p class="news-note">Curated news from trusted development sources</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- Call to Action Section with Background Image -->
+<section class="action-section scroll-animate" id="donate">
+    <div class="section-container">
+        <h2>Transform Lives Today</h2>
+        <p>Your support creates immediate impact. Join us in building hope where it's needed most across Nigeria's underserved communities.</p>
+        
+        <div class="action-buttons">
+            <a href="./donate.html" class="btn-primary" style="background: white; color: var(--accent-color);">Donate Now</a>
+            <a href="#volunteer" class="btn-secondary" id="volunteerBtn">Become a Volunteer</a>
+            <a href="#partner" class="btn-secondary" id="partnerBtn">Partner With Us</a>
+        </div>
+        
+        <!-- Volunteer Form -->
+<!-- Volunteer Form - UPDATED WITH FORMSUBMIT -->
+<div class="form-container" id="volunteerForm">
+    <div class="form-header">Volunteer Application Form</div>
+    <!-- CHANGE THIS EMAIL TO YOUR ACTUAL EMAIL -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="volunteerApplication">
+        <!-- FormSubmit Hidden Fields -->
+        <input type="hidden" name="access_key" value="81317499-1845-4b2b-b5a3-10985f1e84fe">
+        <input type="hidden" name="_subject" value="New Volunteer Application - FOSPI Foundation">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Thank you for your volunteer application to FOSPI Foundation! We will review your submission and contact you within 5 business days.">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <!-- Your existing form fields - ADD NAME ATTRIBUTES -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="volunteerFirstName" class="form-label">First Name *</label>
+                <input type="text" id="volunteerFirstName" name="First Name" class="form-input" required placeholder="Enter your first name">
+            </div>
+            <div class="form-group">
+                <label for="volunteerLastName" class="form-label">Last Name *</label>
+                <input type="text" id="volunteerLastName" name="Last Name" class="form-input" required placeholder="Enter your last name">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="volunteerEmail" class="form-label">Email Address *</label>
+            <input type="email" id="volunteerEmail" name="Email" class="form-input" required placeholder="your.email@example.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="volunteerPhone" class="form-label">Phone Number *</label>
+            <input type="tel" id="volunteerPhone" name="Phone" class="form-input" required placeholder="080XXXXXXXX">
+        </div>
+        
+        <div class="form-group">
+            <label for="volunteerLocation" class="form-label">Location *</label>
+            <select id="volunteerLocation" name="Location" class="form-select" required>
+                <option value="" disabled selected>Select your location</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Port Harcourt">Port Harcourt</option>
+                <option value="Kano">Kano</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Areas of Interest</label>
+            <div class="form-checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Interests[]" value="Education">
+                    Education
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Interests[]" value="Health & Wellbeing">
+                    Health & Wellbeing
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Interests[]" value="Community Outreach">
+                    Community Outreach
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Interests[]" value="Fundraising">
+                    Fundraising
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="volunteerExperience" class="form-label">Relevant Experience</label>
+            <textarea id="volunteerExperience" name="Experience" class="form-textarea" placeholder="Tell us about your previous volunteer experience or relevant skills..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Availability *</label>
+            <div class="form-radio-group">
+                <label class="radio-label">
+                    <input type="radio" class="form-radio" name="Availability" value="Weekends Only" required>
+                    Weekends Only
+                </label>
+                <label class="radio-label">
+                    <input type="radio" class="form-radio" name="Availability" value="Weekdays Only">
+                    Weekdays Only
+                </label>
+                <label class="radio-label">
+                    <input type="radio" class="form-radio" name="Availability" value="Flexible">
+                    Flexible
+                </label>
+            </div>
+        </div>
+        
+        <button type="submit" class="form-submit">Submit Volunteer Application</button>
+    </form>
+</div>
+        
+       <!-- Partner Form - UPDATED WITH FORMSUBMIT -->
+<div class="form-container" id="partnerForm">
+    <div class="form-header">Partnership Inquiry Form</div>
+    <!-- CHANGE THIS EMAIL TO YOUR ACTUAL EMAIL (can be same as volunteer form) -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="partnerInquiry">
+        <!-- FormSubmit Hidden Fields -->
+        <input type="hidden" name="access_key" value="81317499-1845-4b2b-b5a3-10985f1e84fe">
+        <input type="hidden" name="_subject" value="New Partnership Inquiry - FOSPI Foundation">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Thank you for your partnership inquiry to FOSPI Foundation! Our team will review your proposal and contact you within 5 business days.">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <!-- Your existing form fields - ADD NAME ATTRIBUTES -->
+        <div class="form-group">
+            <label for="organizationName" class="form-label">Organization Name *</label>
+            <input type="text" id="organizationName" name="Organization Name" class="form-input" required placeholder="Enter organization name">
+        </div>
+        
+        <div class="form-group">
+            <label for="organizationType" class="form-label">Organization Type *</label>
+            <select id="organizationType" name="Organization Type" class="form-select" required>
+                <option value="" disabled selected>Select organization type</option>
+                <option value="Corporate/Business">Corporate/Business</option>
+                <option value="NGO/Non-Profit">NGO/Non-Profit</option>
+                <option value="Educational Institution">Educational Institution</option>
+                <option value="Government Agency">Government Agency</option>
+                <option value="Faith-based Organization">Faith-based Organization</option>
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="contactPerson" class="form-label">Contact Person *</label>
+                <input type="text" id="contactPerson" name="Contact Person" class="form-input" required placeholder="Full name">
+            </div>
+            <div class="form-group">
+                <label for="contactPosition" class="form-label">Position *</label>
+                <input type="text" id="contactPosition" name="Position" class="form-input" required placeholder="Job title/position">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="partnerEmail" class="form-label">Email Address *</label>
+                <input type="email" id="partnerEmail" name="Email" class="form-input" required placeholder="contact@organization.com">
+            </div>
+            <div class="form-group">
+                <label for="partnerPhone" class="form-label">Phone Number *</label>
+                <input type="tel" id="partnerPhone" name="Phone" class="form-input" required placeholder="080XXXXXXXX">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Partnership Type</label>
+            <div class="form-checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Partnership Type[]" value="Financial Sponsorship">
+                    Financial Sponsorship
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Partnership Type[]" value="In-Kind Donations">
+                    In-Kind Donations
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Partnership Type[]" value="Volunteer Support">
+                    Volunteer Support
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Partnership Type[]" value="Program Collaboration">
+                    Program Collaboration
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" class="form-checkbox" name="Partnership Type[]" value="Awareness & Advocacy">
+                    Awareness & Advocacy
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="partnershipDetails" class="form-label">Partnership Proposal Details *</label>
+            <textarea id="partnershipDetails" name="Proposal Details" class="form-textarea" required placeholder="Describe your partnership proposal, including objectives, scope, and expected outcomes..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="budgetRange" class="form-label">Estimated Budget Range (if applicable)</label>
+            <select id="budgetRange" name="Budget Range" class="form-select">
+                <option value="" selected>Select budget range</option>
+                <option value="Under ₦500,000">Under ₦500,000</option>
+                <option value="₦500,000 - ₦1,000,000">₦500,000 - ₦1,000,000</option>
+                <option value="₦1,000,000 - ₦5,000,000">₦1,000,000 - ₦5,000,000</option>
+                <option value="Over ₦5,000,000">Over ₦5,000,000</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="timeline" class="form-label">Proposed Timeline</label>
+            <textarea id="timeline" name="Timeline" class="form-textarea" placeholder="Proposed timeline for partnership activities..."></textarea>
+        </div>
+        
+        <button type="submit" class="form-submit">Submit Partnership Inquiry</button>
+    </form>
+</div>
+        
+    </div>
+</section>
+
+
+
+ <!-- Footer -->
+<footer class="footer">
+    <div class="section-container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>4 Umuozu Close, Garki 2, Abuja</p>
+                <p><a href="tel:08035515287">Phone: 08035515287</a></p>
+                <p><a href="mailto:contact@fospifoundation.org">Email: contact@fospifoundation.org</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="./about.html">About Us</a></p>
+                <p><a href="./programs.html">Our Programs</a></p>
+                <p><a href="./impact.html">Our Impact</a></p>
+                <p><a href="./contact.html">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Programs</h4>
+                <p><a href="./programs.html">Christmas Feeding Drive</a></p>
+                <p><a href="./programs.html">Community Health</a></p>
+                <p><a href="./programs.html">Girls Tech Education</a></p>
+                <p><a href="./programs.html">Mental Health Advocacy</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Stay Connected</h4>
+                <p>Follow our work and stay updated on our latest initiatives.</p>
+                <div style="margin-top: 1rem;">
+                    <input type="email" id="newsletterEmail" placeholder="Your email address" style="padding: 0.5rem; margin-right: 0.5rem; border: none; border-radius: 4px; width: 60%;">
+                    <button id="subscribeBtn" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> Foundation for Social Program Initiatives (FOSPI). All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Debug: Check if image is loading
+    console.log('Debug: Checking action section background image...');
+    
+    // Test the image path
+    const testImage = new Image();
+    testImage.src = 'images/IMG_2037.jpg';
+    testImage.onload = function() {
+        console.log('✓ Background image loaded successfully:', this.src);
+    };
+    testImage.onerror = function() {
+        console.error('✗ Background image failed to load:', this.src);
+        console.log('Please check:');
+        console.log('1. File exists at: images/IMG_2037.jpg');
+        console.log('2. File path is correct relative to HTML file');
+        console.log('3. File has proper permissions');
+    };
+
+    // Mobile menu functionality with enhanced animations
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const navOverlay = document.querySelector('.mobile-nav-overlay');
+    const navDropdown = document.querySelector('.mobile-nav-dropdown');
+    const body = document.body;
+    let isMenuOpen = false;
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            // Open menu
+            mobileMenu.classList.add('active');
+            navOverlay.classList.add('active');
+            navDropdown.classList.add('active');
+            body.classList.add('mobile-menu-open');
+            mobileMenu.setAttribute('aria-expanded', 'true');
+        } else {
+            // Close menu
+            mobileMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+            navDropdown.classList.remove('active');
+            body.classList.remove('mobile-menu-open');
+            mobileMenu.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    // Event listeners
+    mobileMenu.addEventListener('click', toggleMobileMenu);
+    navOverlay.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking on navigation links
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu a, .mobile-donate-btn');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMenuOpen) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Prevent menu from staying open on window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && isMenuOpen) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Scroll animations
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.scroll-animate');
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('visible');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Initial check
+
+    // Header background on scroll
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+        }
+    });
+
+    // Form toggle functionality
+    const volunteerBtn = document.getElementById('volunteerBtn');
+    const partnerBtn = document.getElementById('partnerBtn');
+    const volunteerForm = document.getElementById('volunteerForm');
+    const partnerForm = document.getElementById('partnerForm');
+    let activeForm = null;
+
+    function toggleForm(formToShow) {
+        // Hide both forms first
+        volunteerForm.classList.remove('active');
+        partnerForm.classList.remove('active');
+        
+        // Reset activeForm tracking
+        activeForm = null;
+        
+        // If clicking the same button, just hide the form
+        if (formToShow === activeForm) {
+            return;
+        }
+        
+        // Show the clicked form
+        if (formToShow === 'volunteer') {
+            volunteerForm.classList.add('active');
+            activeForm = 'volunteer';
+            // Scroll to form for better UX
+            volunteerForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (formToShow === 'partner') {
+            partnerForm.classList.add('active');
+            activeForm = 'partner';
+            // Scroll to form for better UX
+            partnerForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // Add event listeners for form toggles
+    volunteerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleForm('volunteer');
+    });
+
+    partnerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleForm('partner');
+    });
+
+   // Form submission handling - UPDATED FOR FORMSUBMIT
+const volunteerApplication = document.getElementById('volunteerApplication');
+const partnerInquiry = document.getElementById('partnerInquiry');
+
+volunteerApplication.addEventListener('submit', function(e) {
+    // REMOVED e.preventDefault() - let FormSubmit handle submission
+    // Optional: Show loading message
+    const submitBtn = this.querySelector('.form-submit');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    // The form will automatically submit to FormSubmit
+    // You'll receive an email with the form data
+});
+
+partnerInquiry.addEventListener('submit', function(e) {
+    // REMOVED e.preventDefault() - let FormSubmit handle submission
+    // Optional: Show loading message
+    const submitBtn = this.querySelector('.form-submit');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    // The form will automatically submit to FormSubmit
+    // You'll receive an email with the form data
+});
+    // Apply focus trap to mobile menu when open
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (navDropdown.classList.contains('active')) {
+                    trapFocus(navDropdown);
+                    // Focus first menu item
+                    setTimeout(() => {
+                        const firstMenuItem = navDropdown.querySelector('.mobile-nav-menu a');
+                        if (firstMenuItem) firstMenuItem.focus();
+                    }, 100);
+                }
+            }
+        });
+    });
+
+    observer.observe(navDropdown, { attributes: true });
+
+    // Performance monitoring
+    window.addEventListener('load', () => {
+        const loadTime = performance.now();
+        if (loadTime > 3000) {
+            console.warn('Page load time exceeded 3 seconds');
+        }
+    });
+
+    // Add ripple effect to buttons
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+        circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+        circle.classList.add('ripple');
+
+        const ripple = button.getElementsByClassName('ripple')[0];
+        if (ripple) {
+            ripple.remove();
+        }
+
+        button.appendChild(circle);
+    }
+
+    // Apply ripple effect to buttons
+    document.querySelectorAll('.btn-primary, .btn-secondary, .mobile-donate-btn, .form-submit').forEach(button => {
+        button.addEventListener('click', createRipple);
+    });
+
+    // Add ripple effect styles dynamically
+    const rippleStyles = `
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            background-color: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .btn-primary, .btn-secondary, .mobile-donate-btn, .form-submit {
+            position: relative;
+            overflow: hidden;
+        }
+    `;
+
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = rippleStyles;
+    document.head.appendChild(styleSheet);
+
+    // Enhanced scroll progress indicator
+    const scrollProgress = document.createElement('div');
+    scrollProgress.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        z-index: 9999;
+        transition: width 0.3s ease;
+    `;
+    document.body.appendChild(scrollProgress);
+
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        scrollProgress.style.width = scrolled + '%';
+    });
+
+    // Intersection Observer for enhanced animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.impact-card, .stat-item').forEach(el => {
+        observer2.observe(el);
+    });
+
+    // Video background optimization
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+        // Ensure video plays correctly
+        heroVideo.addEventListener('loadedmetadata', function() {
+            this.play().catch(e => {
+                console.log('Video autoplay prevented:', e);
+            });
+        });
+
+        // Fallback for browsers that block autoplay
+        const playVideo = () => {
+            if (heroVideo.paused) {
+                heroVideo.play().catch(e => {
+                    console.log('Video play failed:', e);
+                });
+            }
+        };
+
+        // Try to play on user interaction
+        document.addEventListener('click', playVideo);
+        document.addEventListener('touchstart', playVideo);
+        document.addEventListener('scroll', playVideo);
+    }
+
+    // ==================== NEWS SYSTEM WITH REAL IMAGES ====================
+// ==================== REAL-TIME NEWS SYSTEM ====================
+
+// Main function to fetch REAL news from RSS feeds
+async function fetchRealNews() {
+    try {
+        // Array of RSS feeds for development/humanitarian news
+        const rssFeeds = [
+            {
+                name: "UN News",
+                url: "https://news.un.org/feed/subscribe/en/news/region/africa/rss.xml",
+                category: "Development"
+            },
+            {
+                name: "WHO Africa",
+                url: "https://www.who.int/feeds/entity/afro/en/rss.xml",
+                category: "Health"
+            },
+            {
+                name: "ReliefWeb",
+                url: "https://reliefweb.int/updates/rss.xml",
+                category: "Humanitarian"
+            },
+            {
+                name: "Devex",
+                url: "https://www.devex.com/news/rss",
+                category: "Development"
+            }
+        ];
+        
+        let allNews = [];
+        
+        // Try to fetch from each RSS feed
+        for (const feed of rssFeeds) {
+            try {
+                const newsFromFeed = await fetchRSSFeed(feed);
+                allNews = [...allNews, ...newsFromFeed];
+            } catch (error) {
+                console.log(`Could not fetch from ${feed.name}:`, error);
+            }
+        }
+        
+        // If we got real news, display it
+        if (allNews.length > 0) {
+            // Sort by date (newest first)
+            allNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            // Take only latest 6-8 items
+            const latestNews = allNews.slice(0, 8);
+            displayNews(latestNews);
+            
+            // Store in localStorage with timestamp
+            localStorage.setItem('fospi_news', JSON.stringify({
+                data: latestNews,
+                timestamp: Date.now()
+            }));
+        } else {
+            // Fallback to cached or mock data
+            loadCachedNews();
+        }
+        
+    } catch (error) {
+        console.error('Error fetching real news:', error);
+        loadCachedNews();
+    }
+}
+
+// Function to fetch from a single RSS feed
+async function fetchRSSFeed(feed) {
+    try {
+        // Use CORS proxy to avoid browser restrictions
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const response = await fetch(`${proxyUrl}${encodeURIComponent(feed.url)}`);
+        const text = await response.text();
+        
+        // Parse RSS XML
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+        const items = xml.querySelectorAll('item');
+        
+        const newsItems = [];
+        
+        items.forEach(item => {
+            const title = item.querySelector('title')?.textContent || '';
+            const description = item.querySelector('description')?.textContent || '';
+            const link = item.querySelector('link')?.textContent || '';
+            const pubDate = item.querySelector('pubDate')?.textContent || '';
+            const category = item.querySelector('category')?.textContent || feed.category;
+            
+            // Extract image from description or use default
+            const image = extractImageFromRSS(description) || getDefaultImageByCategory(category);
+            
+            // Only include if it's recent (last 7 days)
+            const newsDate = new Date(pubDate);
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+            
+            if (newsDate > sevenDaysAgo) {
+                newsItems.push({
+                    title: cleanText(title),
+                    description: cleanText(description).substring(0, 120) + '...',
+                    source: feed.name,
+                    date: formatRelativeTime(pubDate),
+                    link: link,
+                    image: image,
+                    category: category,
+                    pubDate: pubDate
+                });
+            }
+        });
+        
+        return newsItems;
+        
+    } catch (error) {
+        console.error(`Error parsing ${feed.name} RSS:`, error);
+        return [];
+    }
+}
+
+// Extract image from RSS description
+function extractImageFromRSS(description) {
+    if (!description) return null;
+    
+    // Try to find image URL
+    const imgRegex = /<img[^>]+src="([^">]+)"/i;
+    const match = description.match(imgRegex);
+    
+    if (match && match[1]) {
+        return match[1];
+    }
+    
+    // Try other patterns
+    const srcRegex = /src="([^"]+)"/i;
+    const srcMatch = description.match(srcRegex);
+    
+    return srcMatch ? srcMatch[1] : null;
+}
+
+// Get default image based on category
+function getDefaultImageByCategory(category) {
+    const categoryImages = {
+        'Health': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+        'Education': 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+        'Humanitarian': 'https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+        'Development': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+        'Food Security': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+        'default': 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+    };
+    
+    return categoryImages[category] || categoryImages.default;
+}
+
+// Load cached news if available
+function loadCachedNews() {
+    const cached = localStorage.getItem('fospi_news');
+    
+    if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        
+        // If cache is less than 2 hours old, use it
+        if (Date.now() - timestamp < 2 * 60 * 60 * 1000) {
+            displayNews(data);
+            return;
+        }
+    }
+    
+    // Otherwise use fallback
+    displayFallbackNews();
+}
+
+// Format date to relative time (e.g., "2 hours ago")
+function formatRelativeTime(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    
+    if (diffHours < 1) return 'Just now';
+    if (diffHours < 24) return `${diffHours} hours ago`;
+    
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// Clean text (remove HTML tags)
+function cleanText(text) {
+    if (!text) return '';
+    return text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '');
+}
+
+// Display news on the page
+function displayNews(newsItems) {
+    const newsGrid = document.getElementById('newsGrid');
+    const newsTicker = document.getElementById('newsTicker');
+    
+    if (!newsGrid || !newsTicker) return;
+    
+    // Clear loading state
+    newsGrid.innerHTML = '';
+    newsTicker.innerHTML = '';
+    
+    // Display news cards
+    newsItems.forEach((item, index) => {
+        // Create news card
+        const newsCard = document.createElement('div');
+        newsCard.className = 'news-card';
+        newsCard.innerHTML = `
+            <div class="news-image" style="background-image: url('${item.image}');">
+                <div class="image-overlay"></div>
+                <div class="news-category">${item.category}</div>
+            </div>
+            <div class="news-content">
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+                <div class="news-meta">
+                    <span class="news-source">${item.source}</span>
+                    <span>${item.date}</span>
+                </div>
+            </div>
+        `;
+        
+        // Make card clickable
+        newsCard.style.cursor = 'pointer';
+        newsCard.addEventListener('click', () => {
+            window.open(item.link, '_blank');
+        });
+        
+        newsGrid.appendChild(newsCard);
+        
+        // Add to ticker (first 3 items)
+        if (index < 3) {
+            const tickerItem = document.createElement('div');
+            tickerItem.className = 'ticker-item';
+            tickerItem.textContent = `${item.title} (${item.source})`;
+            tickerItem.addEventListener('click', () => {
+                window.open(item.link, '_blank');
+            });
+            newsTicker.appendChild(tickerItem);
+        }
+    });
+    
+    // Show last updated time
+    updateLastRefreshedTime();
+}
+
+// Update "Last refreshed" time
+function updateLastRefreshedTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+    });
+    
+    // You can add this to your news section if you want
+    console.log(`News last updated: ${timeString}`);
+}
+
+// Show fallback if news fails to load
+function displayFallbackNews() {
+    const newsGrid = document.getElementById('newsGrid');
+    if (!newsGrid) return;
+    
+    // Use cached curated news as fallback
+    const fallbackNews = [
+        {
+            title: "Latest Development Updates",
+            description: "Stay informed about humanitarian work and community initiatives across Nigeria.",
+            source: "FOSPI Updates",
+            date: "Recently",
+            link: "#",
+            image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+            category: "Updates"
+        }
+    ];
+    
+    displayNews(fallbackNews);
+}
+
+// Check for new news when page becomes visible
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        // Page became visible, refresh news if it's been a while
+        const cached = localStorage.getItem('fospi_news');
+        if (cached) {
+            const { timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp > 30 * 60 * 1000) { // 30 minutes
+                fetchRealNews();
+            }
+        }
+    }
+});
+
+// ==================== END REAL-TIME NEWS SYSTEM ====================
+
+// Initialize news on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetchRealNews(); // Load real news immediately
+    
+    // Refresh news every 30 minutes
+    setInterval(fetchRealNews, 30 * 60 * 1000);
+    
+    // Also refresh when user comes back to tab
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            const cached = localStorage.getItem('fospi_news');
+            if (cached) {
+                const { timestamp } = JSON.parse(cached);
+                // Refresh if data is more than 1 hour old
+                if (Date.now() - timestamp > 60 * 60 * 1000) {
+                    fetchRealNews();
+                }
+            }
+        }
+    });
+});
+
+    // ==================== END NEWS SYSTEM ====================
+
+    // Initialize news on page load - UPDATED to use fetchHybridNews
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchHybridNews(); // CHANGED FROM fetchNews() to fetchHybridNews()
+        
+        // Auto-refresh news every 30 minutes
+        setInterval(fetchHybridNews, 30 * 60 * 1000);
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Newsletter subscription functionality
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    
+    if (subscribeBtn && newsletterEmail) {
+        subscribeBtn.addEventListener('click', () => {
+            const email = newsletterEmail.value.trim();
+            if (email && email.includes('@')) {
+                // You can integrate with your email service here
+                alert('Thank you for subscribing! You will receive updates from FOSPI Foundation.');
+                newsletterEmail.value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        // Allow Enter key to submit
+        newsletterEmail.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                subscribeBtn.click();
+            }
+        });
+    }
+
+    // Year Toggle Functionality for Reports
+    const yearToggleBtns = document.querySelectorAll('.year-toggle-btn');
+    const report2024 = document.getElementById('report2024');
+    const report2025 = document.getElementById('report2025');
+    const report2026 = document.getElementById('report2026');
+    const reportStat = document.getElementById('reportStat');
+
+    yearToggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const year = btn.getAttribute('data-year');
+            
+            // Update button states
+            yearToggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Hide all reports first
+            report2024.classList.add('hidden');
+            report2025.classList.add('hidden');
+            report2026.classList.add('hidden');
+            
+            // Show appropriate report and update stat
+            if (year === '2024') {
+                report2024.classList.remove('hidden');
+                reportStat.textContent = '100%';
+            } else if (year === '2025') {
+                report2025.classList.remove('hidden');
+                reportStat.textContent = '400+';
+            } else if (year === '2026') {
+                report2026.classList.remove('hidden');
+                reportStat.textContent = '10,000+';
+            }
+        });
+    });
+    
+    // Debug: Check if action section exists and has background
+    const actionSection = document.querySelector('.action-section');
+    if (actionSection) {
+        console.log('Action section found, checking computed styles...');
+        const computedStyle = window.getComputedStyle(actionSection);
+        console.log('Background image URL:', computedStyle.backgroundImage);
+        console.log('Background size:', computedStyle.backgroundSize);
+        console.log('Background position:', computedStyle.backgroundPosition);
+    } else {
+        console.error('Action section not found!');
+    }
+</script>
+</body>
+</html>

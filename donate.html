@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now - Transform Lives with FOSPI Foundation</title>
+    <meta name="description" content="Your donation helps young people across Africa chase their dreams. Support FOSPI Foundation's programs providing meals, counseling, and life-changing opportunities.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #f59e0b;
+            --accent-color: #34d399;
+            --tertiary-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f0fdf4;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --green-50: #ecfdf5;
+            --green-100: #d1fae5;
+            --green-600: #059669;
+            --green-700: #047857;
+            --green-800: #065f46;
+            --grey-green: #374151;
+            --hero-green-start: #2d5a3d;
+            --hero-green-mid: #1a3d2e;
+            --hero-navy-dark: #0f1419;
+            --hero-navy-deep: #0a0e13;
+            --error-color: #ef4444;
+            --success-color: #10b981;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+                                
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            z-index: 1001;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1002;
+            position: relative;
+            width: 35px;
+            height: 35px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background: var(--primary-color);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+            background: var(--primary-color);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-dropdown {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: white;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-nav-dropdown.active {
+            right: 0;
+        }
+
+        .mobile-nav-content {
+            padding: 2rem;
+        }
+
+        .mobile-nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-menu li {
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(5) { transition-delay: 0.5s; }
+
+        .mobile-nav-menu a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover::before {
+            width: 20px;
+        }
+
+        .mobile-donate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 6px 20px rgba(30, 119, 18, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-nav-dropdown.active .mobile-donate-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+
+        .mobile-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 119, 18, 0.4);
+        }
+
+        .mobile-nav-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-footer {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, 
+                var(--hero-green-start) 0%, 
+                var(--hero-green-mid) 35%, 
+                var(--hero-navy-dark) 75%, 
+                var(--hero-navy-deep) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 211, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%);
+            animation: floatPattern 20s ease-in-out infinite;
+        }
+
+        @keyframes floatPattern {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            min-height: calc(100vh - 80px);
+        }
+
+        .hero-content {
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-donate-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .impact-preview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .impact-preview h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .preview-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .preview-stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .preview-stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            color: white;
+            margin-top: 0.25rem;
+        }
+
+        /* Section Container */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .impact-intro {
+            background: linear-gradient(135deg, var(--light-color), var(--green-50));
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(5, 150, 105, 0.1);
+            text-align: center;
+        }
+
+        .impact-intro h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .impact-intro p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .impact-stat {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .impact-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .impact-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .impact-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .impact-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .impact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .impact-card .icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .impact-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .impact-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Donation Section */
+        .donation-section {
+            padding: 6rem 0;
+            background: var(--green-50);
+        }
+
+        .currency-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-container {
+            background: white;
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            gap: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .donation-tier {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .donation-tier:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-color);
+        }
+
+        .donation-tier.popular {
+            border-color: var(--secondary-color);
+            transform: scale(1.02);
+        }
+
+        .donation-tier.popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .donation-tier.selected {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .tier-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .tier-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-impact {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .tier-details {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Payment Methods Section */
+        .payment-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .payment-method {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .payment-method h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .payment-method .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .bank-details {
+            background: var(--green-50);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(5, 150, 105, 0.1);
+        }
+
+        .bank-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .bank-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .bank-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            flex: 1;
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .bank-value {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1rem;
+            flex: 2;
+            text-align: center;
+            word-break: break-all;
+            user-select: all;
+            cursor: pointer;
+            padding: 0.75rem;
+            background: rgba(5, 150, 105, 0.05);
+            border-radius: 6px;
+            border: 1px dashed var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .bank-value:hover {
+            background: rgba(5, 150, 105, 0.1);
+        }
+
+        .copy-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 70px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--tertiary-color);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: var(--success-color);
+        }
+
+        .paypal-btn {
+            background: linear-gradient(135deg, #0070ba, #005ea6);
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .paypal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* FAQ Section - Accordion Style */
+        .faq-section {
+            padding: 6rem 0;
+            background: var(--green-50);
+        }
+
+        .faq-intro {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-intro h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .faq-intro .icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .faq-intro p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .faq-question:hover {
+            background: var(--green-50);
+        }
+
+        .faq-question.active {
+            background: var(--green-50);
+            border-bottom-color: var(--border-color);
+        }
+
+        .faq-toggle {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(45deg);
+            background: var(--secondary-color);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            line-height: 1.6;
+            background: var(--green-50);
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer strong {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Success Message */
+        .copy-success {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-xl);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-success.show {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-examples {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-dropdown {
+                width: 100%;
+            }
+
+            .hero-container {
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-donate-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .preview-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .donation-tier.popular {
+                transform: none;
+            }
+
+            .payment-method {
+                padding: 2rem;
+            }
+
+            .bank-detail {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bank-value {
+                text-align: center;
+                width: 100%;
+            }
+
+            .copy-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .impact-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .faq-question {
+                padding: 1.25rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .faq-answer.active {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .faq-intro h3 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .faq-intro .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .faq-intro p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .donation-tier {
+                padding: 1.5rem;
+            }
+
+            .tier-amount {
+                font-size: 1.8rem;
+            }
+
+            .payment-method {
+                padding: 1.5rem;
+            }
+
+            .bank-details {
+                padding: 1.5rem;
+            }
+
+            .impact-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .faq-answer.active {
+                padding: 1rem;
+            }
+
+            .faq-intro h3 {
+                font-size: 1.3rem;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .faq-intro .icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .faq-intro p {
+                font-size: 0.95rem;
+            }
+
+            .copy-success {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-100px);
+            }
+
+            .copy-success.show {
+                transform: translateY(0);
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #047857;
+                --secondary-color: #ff6600;
+                --text-dark: #000000;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Body scroll lock when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Success Message -->
+    <div class="copy-success" id="copySuccess">
+        <i class="fas fa-check-circle"></i>
+        <span>Copied to clipboard!</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <a href="./index.html" class="logo" aria-label="FOSPI Foundation Home">FOSPI</a>
+            
+            <ul class="nav-menu">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./programs.html">Programs</a></li>
+                <li><a href="./impact.html">Impact</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+            
+            <a href="./donate.html" class="donate-btn active" aria-label="Donate to FOSPI Foundation">Donate Now</a>
+            
+            <button class="mobile-menu" aria-label="Toggle mobile navigation" aria-expanded="false" type="button">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay"></div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div class="mobile-nav-dropdown">
+            <div class="mobile-nav-content">
+                <ul class="mobile-nav-menu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./programs.html">Our Programs</a></li>
+                    <li><a href="./impact.html">Our Impact</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                
+                <a href="./donate.html" class="mobile-donate-btn">Donate Now</a>
+                
+                <div class="mobile-nav-footer">
+                    <div class="contact-info">
+                        <strong>Contact Us</strong><br>
+                        4 Umuozu Close, Garki 2, Abuja<br>
+                        📞 08035515287<br>
+                        ✉️ contact@fospifoundation.org
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Your donation = <span class="hero-highlight">A young person's dream fulfilled</span></h1>
+                <p>If it was up to you, to help one young person chase their dreams, would you make that happen with your donation? <strong>GIVE US A HAND</strong>, support us and change the course of a life today! We need your support to turn the potential of young people across Africa into today's talents and tomorrow's leaders.</p>
+                <div class="hero-cta">
+                    <a href="#donate" class="hero-donate-btn">
+                        <i class="fas fa-heart"></i>
+                        Donate Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="impact-preview">
+                    <h3>Your Impact</h3>
+                    <div class="preview-stats">
+                        <div class="preview-stat">
+                            <span class="preview-stat-number">5,000+</span>
+                            <span class="preview-stat-label">Meals Provided</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-number">125</span>
+                            <span class="preview-stat-label">Counseling Sessions</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-number">78</span>
+                            <span class="preview-stat-label">Girls Empowered</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-number">400+</span>
+                            <span class="preview-stat-label">Lives Transformed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Give a Little, Help a Lot</h2>
+            <p class="section-subtitle">See exactly how your donation transforms lives and creates lasting change in communities across Nigeria.</p>
+            
+            <div class="impact-intro">
+                <h3>
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    Every Donation Makes a Real Difference
+                </h3>
+                <p>Your generosity directly funds life-changing programs that address the most pressing needs in Nigerian communities. From providing nutritious meals to offering professional counseling and technology training, every contribution creates a ripple effect of positive change that extends far beyond the initial recipient.</p>
+            </div>
+
+            <div class="impact-stats">
+                <div class="impact-stat">
+                    <span class="impact-stat-number">₦3,000</span>
+                    <span class="impact-stat-label">Feeds 1 Person</span>
+                </div>
+                <div class="impact-stat">
+                    <span class="impact-stat-number">₦15,000</span>
+                    <span class="impact-stat-label">1 Counseling Session</span>
+                </div>
+                <div class="impact-stat">
+                    <span class="impact-stat-number">₦50,000</span>
+                    <span class="impact-stat-label">Technology Training</span>
+                </div>
+                <div class="impact-stat">
+                    <span class="impact-stat-number">100%</span>
+                    <span class="impact-stat-label">Goes to Programs</span>
+                </div>
+            </div>
+            
+            <div class="impact-examples">
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Provide Nutrition</h3>
+                    <p>Your donation ensures families don't go to bed hungry. Each meal provides essential nutrition and shows that someone cares about their wellbeing. We've served over 5,000 meals to those in need, creating a foundation for health and hope.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental Health Support</h3>
+                    <p>Professional counseling sessions help individuals overcome psychological challenges and build resilience for a brighter future. Our 125+ counseling sessions have helped people process trauma, build confidence, and develop coping strategies.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Empower Through Technology</h3>
+                    <p>Technology training opens doors to new opportunities, giving young people skills for the digital economy and entrepreneurship. We've empowered 78 girls with digital literacy skills that increase their earning potential by 300%.</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Educational Support</h3>
+                    <p>From school supplies to tutoring, we ensure that lack of resources doesn't stand between a child and their education. Every donation helps keep kids in school and learning, breaking the cycle of poverty through education.</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-fist-raised"></i>
+                    </div>
+                    <h3>Build Confidence</h3>
+                    <p>Our programs don't just provide immediate relief - they build long-term confidence and life skills. Participants learn leadership, communication, and problem-solving skills that serve them throughout their lives.</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Community Building</h3>
+                    <p>Every program creates stronger communities by bringing people together, fostering mutual support, and creating networks that last beyond our intervention. Your donation helps build a more connected, supportive society.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section scroll-animate" id="donate">
+        <div class="section-container">
+            <h2 class="section-title">Choose Your Impact</h2>
+            <p class="section-subtitle">Select a donation amount that works for you. Every contribution, no matter the size, makes a real difference.</p>
+            
+            <!-- Currency Toggle -->
+            <div class="currency-toggle">
+                <div class="toggle-container">
+                    <button class="toggle-btn active" data-currency="ngn">Nigerian Naira (₦)</button>
+                    <button class="toggle-btn" data-currency="usd">US Dollars ($)</button>
+                </div>
+            </div>
+
+            <!-- Donation Tiers -->
+            <div class="donation-grid">
+                <!-- NGN Amounts -->
+                <div class="donation-tier ngn-tier" data-amount="9000">
+                    <div class="tier-icon">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <div class="tier-amount">₦9,000</div>
+                    <div class="tier-impact">3 Meals</div>
+                    <div class="tier-details">Provide nutritious meals for 3 people in need</div>
+                </div>
+
+                <div class="donation-tier ngn-tier popular" data-amount="25000">
+                    <div class="tier-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="tier-amount">₦25,000</div>
+                    <div class="tier-impact">8 Meals or 1 Meal + 1 Counseling</div>
+                    <div class="tier-details">Feed 8 people or provide a meal plus mental health support</div>
+                </div>
+
+                <div class="donation-tier ngn-tier" data-amount="50000">
+                    <div class="tier-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="tier-amount">₦50,000</div>
+                    <div class="tier-impact">16 Meals or 9 Meals + 1 Counseling</div>
+                    <div class="tier-details">Comprehensive support combining nutrition and mental wellness</div>
+                </div>
+
+                <div class="donation-tier ngn-tier" data-amount="100000">
+                    <div class="tier-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="tier-amount">₦100,000</div>
+                    <div class="tier-impact">33 Meals or 18 Meals + 2 Counseling</div>
+                    <div class="tier-details">Extended support reaching multiple families</div>
+                </div>
+
+                <div class="donation-tier ngn-tier" data-amount="200000">
+                    <div class="tier-icon">
+                        <i class="fas fa-community"></i>
+                    </div>
+                    <div class="tier-amount">₦200,000</div>
+                    <div class="tier-impact">66 Meals or 37 Meals + 4 Counseling</div>
+                    <div class="tier-details">Significant community impact with broad reach</div>
+                </div>
+
+                <div class="donation-tier ngn-tier" data-amount="500000">
+                    <div class="tier-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="tier-amount">₦500,000</div>
+                    <div class="tier-impact">166 Meals or 93 Meals + 10 Counseling</div>
+                    <div class="tier-details">Transform an entire community with comprehensive support</div>
+                </div>
+
+                <!-- USD Amounts (initially hidden) -->
+                <div class="donation-tier usd-tier" data-amount="10" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <div class="tier-amount">$10</div>
+                    <div class="tier-impact">2 Meals</div>
+                    <div class="tier-details">Provide nutritious meals for 2 people in need</div>
+                </div>
+
+                <div class="donation-tier usd-tier popular" data-amount="25" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="tier-amount">$25</div>
+                    <div class="tier-impact">6 Meals or 3 Meals + 1 Counseling</div>
+                    <div class="tier-details">Feed 6 people or provide meals plus mental health support</div>
+                </div>
+
+                <div class="donation-tier usd-tier" data-amount="50" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="tier-amount">$50</div>
+                    <div class="tier-impact">12 Meals or 7 Meals + 1 Counseling</div>
+                    <div class="tier-details">Comprehensive support combining nutrition and mental wellness</div>
+                </div>
+
+                <div class="donation-tier usd-tier" data-amount="100" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="tier-amount">$100</div>
+                    <div class="tier-impact">25 Meals or 14 Meals + 2 Counseling</div>
+                    <div class="tier-details">Extended support reaching multiple families</div>
+                </div>
+
+                <div class="donation-tier usd-tier" data-amount="250" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-community"></i>
+                    </div>
+                    <div class="tier-amount">$250</div>
+                    <div class="tier-impact">62 Meals or 35 Meals + 4 Counseling</div>
+                    <div class="tier-details">Significant community impact with broad reach</div>
+                </div>
+
+                <div class="donation-tier usd-tier" data-amount="500" style="display: none;">
+                    <div class="tier-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="tier-amount">$500</div>
+                    <div class="tier-impact">125 Meals or 70 Meals + 8 Counseling</div>
+                    <div class="tier-details">Transform an entire community with comprehensive support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods Section -->
+    <section class="payment-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Choose Your Payment Method</h2>
+            <p class="section-subtitle">We've made it easy for you to donate through multiple secure payment options.</p>
+            
+            <div class="payment-methods">
+                <!-- Bank Transfer -->
+                <div class="payment-method">
+                    <h3>
+                        <div class="icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        Bank Transfer (Naira)
+                    </h3>
+                    <p>Make a direct transfer using the bank details below:</p>
+                    
+                    <div class="bank-details">
+                        <div class="bank-detail">
+                            <span class="bank-label">Account Name:</span>
+                            <span class="bank-value" data-copy="Foundation for Social Program Initiatives" title="Click to copy">Foundation for Social Program Initiatives</span>
+                            <button class="copy-btn" onclick="copyBankDetail(this, 'Foundation for Social Program Initiatives')">
+                                <i class="fas fa-copy"></i>
+                                Copy
+                            </button>
+                        </div>
+                        <div class="bank-detail">
+                            <span class="bank-label">Bank:</span>
+                            <span class="bank-value" data-copy="FCMB" title="Click to copy">FCMB</span>
+                            <button class="copy-btn" onclick="copyBankDetail(this, 'FCMB')">
+                                <i class="fas fa-copy"></i>
+                                Copy
+                            </button>
+                        </div>
+                        <div class="bank-detail">
+                            <span class="bank-label">Account Number:</span>
+                            <span class="bank-value" data-copy="2005151432" title="Click to copy">2005151432</span>
+                            <button class="copy-btn" onclick="copyBankDetail(this, '2005151432')">
+                                <i class="fas fa-copy"></i>
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p><strong>After transfer:</strong> Please send a confirmation message to <a href="mailto:contact@fospifoundation.org" style="color: var(--primary-color);">contact@fospifoundation.org</a> with your transfer receipt for proper acknowledgment.</p>
+                </div>
+
+                <!-- PayPal -->
+                <div class="payment-method">
+                    <h3>
+                        <div class="icon">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        PayPal (International)
+                    </h3>
+                    <p>For international donors, use our secure PayPal link for instant donation processing:</p>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div style="background: var(--green-50); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid var(--border-color);">
+                            <p><strong><i class="fas fa-shield-alt"></i> Secure • <i class="fas fa-bolt"></i> Fast • <i class="fas fa-globe"></i> International</strong></p>
+                            <p style="margin-top: 0.5rem;">Supports all major credit cards and PayPal balance</p>
+                        </div>
+                        
+                        <a href="https://www.paypal.com/ncp/payment/APUEPML9CEHXW" class="paypal-btn" target="_blank">
+                            <i class="fab fa-paypal"></i>
+                            <strong>Donate via PayPal</strong>
+                        </a>
+                    </div>
+                    
+                    <p><em><i class="fas fa-info-circle"></i> You'll be redirected to PayPal's secure payment page. No PayPal account required - you can pay with any credit or debit card.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section - Accordion Style -->
+    <section class="faq-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about donating to FOSPI Foundation</p>
+            
+            <div class="faq-intro">
+                <h3>
+                    <div class="icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    Got Questions? We've Got Answers!
+                </h3>
+                <p>We believe in transparency and want you to feel confident about your donation. Here are the most common questions we receive from our generous supporters.</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is my donation tax-deductible?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! FOSPI Foundation is a registered nonprofit organization in Nigeria. We'll provide an official donation receipt for your tax records upon request.</p>
+                        <p><strong>Contact us at contact@fospifoundation.org</strong> after your donation to request your receipt.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How is my donation used?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>100% of your donation goes directly to our programs.</strong> We have a strict policy: every naira you donate is used for meals, counseling sessions, technology training, and educational support.</p>
+                        <p>We provide detailed impact reports showing exactly how your contribution helped transform lives.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I donate monthly or set up recurring donations?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Monthly donations help us plan long-term programs and create sustainable impact.</p>
+                        <p>Contact us at <strong>contact@fospifoundation.org</strong> to set up recurring donations through bank standing orders or PayPal subscriptions. Monthly donors receive special updates and recognition.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you accept non-monetary donations?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we welcome in-kind donations! We accept food items, medical supplies, educational materials, technology equipment, and volunteer time.</p>
+                        <p><strong>Please contact us first</strong> to discuss what's currently needed and arrange proper delivery or pickup.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I get updates on my impact?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All donors receive <strong>quarterly impact reports</strong> with photos, beneficiary stories, and detailed statistics showing how their contributions are making a difference.</p>
+                        <p>We also send special updates when major milestones are reached thanks to donations like yours.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is it safe to donate online?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely secure! We use <strong>PayPal's industry-leading payment processing</strong> with bank-level encryption for all online transactions.</p>
+                        <p>Your financial information is never stored on our servers. For bank transfers, we provide verified account details from our registered business account.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's the minimum donation amount?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>There's no minimum! Whether you donate ₦1,000 or ₦100,000, every contribution makes a real difference.</p>
+                        <p>Even small amounts add up to provide meals, support services, and hope to those who need it most.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I specify how my donation is used?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! If you have a preference for how your donation is used (meals, counseling, technology training, etc.), please mention it when you donate or email us.</p>
+                        <p>While we'll do our best to honor your request, we may use funds where the need is greatest.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How quickly will my donation start helping people?</span>
+                        <div class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Very quickly! <strong>Donations are typically deployed within 1-2 weeks</strong> of receipt.</p>
+                        <p>We maintain relationships with local suppliers and service providers, allowing us to convert your donation into meals, counseling sessions, or training programs almost immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>4 Umuozu Close, Garki 2, Abuja</p>
+                    <p><a href="tel:08035515287">Phone: 08035515287</a></p>
+                    <p><a href="mailto:contact@fospifoundation.org">Email: contact@fospifoundation.org</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="./about.html">About Us</a></p>
+                    <p><a href="./programs.html">Our Programs</a></p>
+                    <p><a href="./impact.html">Our Impact</a></p>
+                    <p><a href="./contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Programs</h4>
+                    <p><a href="./programs.html">Christmas Feeding Drive</a></p>
+                    <p><a href="./programs.html">Community Health</a></p>
+                    <p><a href="./programs.html">Girls Tech Education</a></p>
+                    <p><a href="./programs.html">Mental Health Advocacy</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Follow our work and stay updated on our latest initiatives.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address" style="padding: 0.5rem; margin-right: 0.5rem; border: none; border-radius: 4px; width: 60%;">
+                        <button id="subscribeBtn" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Foundation for Social Program Initiatives (FOSPI). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navOverlay = document.querySelector('.mobile-nav-overlay');
+        const navDropdown = document.querySelector('.mobile-nav-dropdown');
+        const body = document.body;
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.classList.add('active');
+                navOverlay.classList.add('active');
+                navDropdown.classList.add('active');
+                body.classList.add('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'true');
+            } else {
+                mobileMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
+                navDropdown.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        mobileMenu.addEventListener('click', toggleMobileMenu);
+        navOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking on navigation links
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu a, .mobile-donate-btn');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Prevent menu from staying open on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024 && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Currency toggle functionality
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const ngnTiers = document.querySelectorAll('.ngn-tier');
+        const usdTiers = document.querySelectorAll('.usd-tier');
+
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currency = btn.getAttribute('data-currency');
+                
+                // Update button states
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show/hide appropriate tiers
+                if (currency === 'ngn') {
+                    ngnTiers.forEach(tier => tier.style.display = 'block');
+                    usdTiers.forEach(tier => tier.style.display = 'none');
+                } else {
+                    ngnTiers.forEach(tier => tier.style.display = 'none');
+                    usdTiers.forEach(tier => tier.style.display = 'block');
+                }
+            });
+        });
+
+        // Donation tier selection
+        const donationTiers = document.querySelectorAll('.donation-tier');
+        let selectedAmount = null;
+        let selectedCurrency = 'ngn';
+
+        donationTiers.forEach(tier => {
+            tier.addEventListener('click', () => {
+                // Remove selected class from all tiers
+                donationTiers.forEach(t => t.classList.remove('selected'));
+                
+                // Add selected class to clicked tier
+                tier.classList.add('selected');
+                
+                // Store selected amount
+                selectedAmount = tier.getAttribute('data-amount');
+                
+                // Get current currency
+                const activeCurrency = document.querySelector('.toggle-btn.active').getAttribute('data-currency');
+                selectedCurrency = activeCurrency;
+            });
+        });
+
+        // Enhanced copy to clipboard functionality
+        function copyBankDetail(button, text) {
+            // Use modern clipboard API with fallback
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess(button, text);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    fallbackCopy(button, text);
+                });
+            } else {
+                // Fallback for older browsers or non-HTTPS contexts
+                fallbackCopy(button, text);
+            }
+        }
+
+        function fallbackCopy(button, text) {
+            // Create temporary textarea element
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button, text);
+            } catch (err) {
+                console.error('Fallback copy failed: ', err);
+                showCopyError(button);
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showCopySuccess(button, text) {
+            // Update button state
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.classList.add('copied');
+            
+            // Show success message
+            const successMsg = document.getElementById('copySuccess');
+            successMsg.querySelector('span').textContent = `Copied: ${text}`;
+            successMsg.classList.add('show');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('copied');
+                successMsg.classList.remove('show');
+            }, 2000);
+        }
+
+        function showCopyError(button) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-times"></i> Failed';
+            button.style.background = 'var(--error-color)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = 'var(--primary-color)';
+            }, 2000);
+        }
+
+        // Allow clicking on bank values to copy
+        document.querySelectorAll('.bank-value').forEach(element => {
+            element.addEventListener('click', function() {
+                const text = this.getAttribute('data-copy');
+                const button = this.parentElement.querySelector('.copy-btn');
+                copyBankDetail(button, text);
+            });
+        });
+
+        // FAQ Accordion functionality
+        function toggleFAQ(questionElement) {
+            const faqItem = questionElement.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const isActive = questionElement.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-question').forEach(q => {
+                if (q !== questionElement) {
+                    q.classList.remove('active');
+                    q.parentElement.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ
+            if (isActive) {
+                questionElement.classList.remove('active');
+                answer.classList.remove('active');
+            } else {
+                questionElement.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter subscription functionality
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        
+        if (subscribeBtn && newsletterEmail) {
+            subscribeBtn.addEventListener('click', () => {
+                const email = newsletterEmail.value.trim();
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing! You will receive updates from FOSPI Foundation.');
+                    newsletterEmail.value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
+
+            newsletterEmail.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    subscribeBtn.click();
+                }
+            });
+        }
+
+        // Auto-update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Enhanced scroll progress indicator
+        const scrollProgress = document.createElement('div');
+        scrollProgress.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 9999;
+            transition: width 0.3s ease;
+        `;
+        document.body.appendChild(scrollProgress);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const loadTime = performance.now();
+            if (loadTime > 3000) {
+                console.warn('Page load time exceeded 3 seconds');
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,71 @@
+
+body { 
+    background: skyblue; 
+    margin: 0; 
+}
+
+
+.ground { 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    height: 100px; 
+    background: green; 
+}
+
+
+.plane {
+    position: absolute;
+    left: 50px;
+    bottom: 100px;
+    font-size: 60px;
+    animation: fly 20s infinite;
+}
+
+/* The flying recipe for the airplane */
+@keyframes fly {
+    /* Step 1: Stay still (first 4 seconds) */
+    0%,20% { 
+        left:50px; 
+        bottom:100px; 
+    }
+    /* Step 2: Roll on ground (next 8 seconds) */
+    20%,60% { 
+        left:85%; 
+        bottom:100px; 
+    }
+    /* Step 3: Fly up! (last 8 seconds) */
+    60%,100% { 
+        left:90%; 
+        bottom:1000px; 
+    }
+}
+
+
+.sun {
+    position: absolute; 
+    top: 20px; 
+    right: 50px; 
+    font-size: 80px;
+}
+
+
+.cloud {
+    position: absolute;
+    background: white;
+    width: 100px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+
+.cloud1 {
+    top: 50px;
+    left: 200px;
+}
+
+
+.cloud2 {
+    top: 120px;
+    left: 400px;
+}

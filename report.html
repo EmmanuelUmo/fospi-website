@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 Financial Report & Impact Analysis - FOSPI Foundation</title>
+    <meta name="description" content="Comprehensive analysis of FOSPI Foundation's 2024 financial performance, program impact, and transparency report showing how donations create lasting change.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #f59e0b;
+            --accent-color: #34d399;
+            --tertiary-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f0fdf4;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --green-50: #ecfdf5;
+            --green-100: #d1fae5;
+            --green-600: #059669;
+            --green-700: #047857;
+            --green-800: #065f46;
+            --grey-green: #374151;
+            --hero-green-start: #2d5a3d;
+            --hero-green-mid: #1a3d2e;
+            --hero-navy-dark: #0f1419;
+            --hero-navy-deep: #0a0e13;
+            --error-color: #ef4444;
+            --success-color: #10b981;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, 
+                var(--hero-green-start) 0%, 
+                var(--hero-green-mid) 35%, 
+                var(--hero-navy-dark) 75%, 
+                var(--hero-navy-deep) 100%);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 211, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%);
+            animation: floatPattern 20s ease-in-out infinite;
+        }
+
+        @keyframes floatPattern {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Container */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Executive Summary */
+        .summary-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .summary-card .icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .summary-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .summary-label {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-detail {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* Financial Overview */
+        .financial-section {
+            padding: 6rem 0;
+            background: var(--green-50);
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .chart-title .icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .full-width-chart .chart-wrapper {
+            height: 400px;
+        }
+
+        /* Impact Metrics */
+        .impact-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), #fbbf24);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .impact-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .impact-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .impact-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Transparency Section */
+        .transparency-section {
+            padding: 6rem 0;
+            background: var(--green-50);
+        }
+
+        .transparency-intro {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .transparency-intro h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .transparency-intro .icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .efficiency-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .efficiency-metric {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .efficiency-metric:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .efficiency-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .efficiency-label {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .analysis-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--green-50);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .analysis-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-container {
+                padding: 3rem 1rem;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .chart-container {
+                padding: 2rem;
+            }
+
+            .summary-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .efficiency-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .efficiency-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <a href="#" class="logo" aria-label="FOSPI Foundation Home">FOSPI</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Programs</a></li>
+                <li><a href="#">Impact</a></li>
+                <li><a href="#" class="active">Reports</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            
+            <a href="#" class="donate-btn" aria-label="Donate to FOSPI Foundation">Donate Now</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>2024 <span class="hero-highlight">Financial Report</span> & Impact Analysis</h1>
+                <p>Comprehensive transparency report showing how your donations transformed lives across Nigerian communities. Every naira accounted for, every impact measured, every story shared.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="summary-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">2024 At A Glance</h2>
+            <p class="section-subtitle">Key financial metrics and impact indicators that demonstrate our commitment to transparency and effectiveness.</p>
+            
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="summary-value">₦5.05M</span>
+                    <div class="summary-label">Total Revenue</div>
+                    <div class="summary-detail">$3,061 USD from generous donors</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="summary-value">₦4.96M</span>
+                    <div class="summary-label">Program Expenses</div>
+                    <div class="summary-detail">$3,003 USD directly to programs</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <span class="summary-value">98.1%</span>
+                    <div class="summary-label">Program Efficiency</div>
+                    <div class="summary-detail">Of every donation goes to programs</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="summary-value">400+</span>
+                    <div class="summary-label">Lives Transformed</div>
+                    <div class="summary-detail">Across 3 communities in Cross River State</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <span class="summary-value">5,000+</span>
+                    <div class="summary-label">Meals Provided</div>
+                    <div class="summary-detail">Including 2,000+ during Christmas Drive</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="summary-value">125</span>
+                    <div class="summary-label">Counseling Sessions</div>
+                    <div class="summary-detail">Free mental health support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Overview -->
+    <section class="financial-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Financial Breakdown</h2>
+            <p class="section-subtitle">Detailed analysis of revenue sources, expense allocation, and donation channels.</p>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">
+                        <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                        Revenue Sources
+                    </h3>
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">
+                        <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                        Expense Categories
+                    </h3>
+                    <div class="chart-wrapper">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container full-width-chart" style="grid-column: 1 / -1;">
+                    <h3 class="chart-title">
+                        <div class="icon"><i class="fas fa-credit-card"></i></div>
+                        Donation Channels Performance
+                    </h3>
+                    <div class="chart-wrapper">
+                        <canvas id="donationChannelsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Metrics -->
+    <section class="impact-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Program Impact</h2>
+            <p class="section-subtitle">Measurable outcomes demonstrating the real-world effect of your donations.</p>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <span class="impact-number">2,000+</span>
+                    <div class="impact-title">Christmas Drive Meals</div>
+                    <div class="impact-description">Served across Nsan, Akpabuyo, and Okoyong Communities during 4-day Christmas outreach</div>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="impact-number">125</span>
+                    <div class="impact-title">Counseling Sessions</div>
+                    <div class="impact-description">Professional mental health support addressing youth unemployment, substance abuse, and social isolation</div>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-venus"></i>
+                    </div>
+                    <span class="impact-number">78</span>
+                    <div class="impact-title">Girls Empowered</div>
+                    <div class="impact-description">Technology training and digital literacy programs increasing earning potential by 300%</div>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <span class="impact-number">30+</span>
+                    <div class="impact-title">Community Assessments</div>
+                    <div class="impact-description">Interviews and focus groups across rural and peri-urban settings to understand needs</div>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <span class="impact-number">3</span>
+                    <div class="impact-title">Communities Served</div>
+                    <div class="impact-description">Nsan, Akpabuyo, and Okoyong in Cross River State with comprehensive programming</div>
+                </div>
+
+                <div class="impact-card">
+                    <div class="icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <span class="impact-number">4</span>
+                    <div class="impact-title">Days of Outreach</div>
+                    <div class="impact-description">Intensive Christmas feeding and mental health drive reaching hundreds of families</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="transparency-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Financial Transparency</h2>
+            <p class="section-subtitle">Our commitment to accountability means every donation is tracked and every outcome is measured.</p>
+            
+            <div class="transparency-intro">
+                <h3>
+                    <div class="icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    100% Donation Commitment
+                </h3>
+                <p>We guarantee that 100% of donations go directly to program activities. Our operational costs are covered by grants and partnerships, ensuring your contribution creates maximum impact.</p>
+            </div>
+
+            <div class="efficiency-metrics">
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">98.1%</span>
+                    <div class="efficiency-label">Program Efficiency</div>
+                </div>
+                
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">1.9%</span>
+                    <div class="efficiency-label">Administrative Costs</div>
+                </div>
+                
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">₦3,000</span>
+                    <div class="efficiency-label">Cost Per Meal</div>
+                </div>
+                
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">₦15,000</span>
+                    <div class="efficiency-label">Cost Per Counseling</div>
+                </div>
+
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">₦94,305</span>
+                    <div class="efficiency-label">Net Assets Growth</div>
+                </div>
+                
+                <div class="efficiency-metric">
+                    <span class="efficiency-value">$57</span>
+                    <div class="efficiency-label">Surplus (USD)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section class="analysis-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Financial Analysis & Insights</h2>
+            <p class="section-subtitle">Deep dive into our 2024 performance and strategic outlook for sustainable growth.</p>
+            
+            <div class="analysis-content">
+                <h3><i class="fas fa-chart-line"></i> Revenue Diversification Success</h3>
+                <p>Our 2024 revenue of ₦5.05M ($3,061) came from three primary sources, demonstrating healthy diversification. Individual contributions represent 48% of total revenue, while partner contributions (33%) and fundraising events (19%) provide stable supplementary income.</p>
+
+                <div class="highlight-box">
+                    <strong>Key Achievement:</strong> We maintained a remarkable 98.1% program efficiency ratio, with only ₦94,305 ($57) in net assets growth, showing that nearly every donated naira went directly to beneficiaries.
+                </div>
+
+                <h3><i class="fas fa-bullseye"></i> Program Impact Excellence</h3>
+                <p>The Christmas Feeding and Mental Health Outreach program consumed 94.8% of our total expenses (₦4.7M), directly serving over 400 people across three communities. This focused approach maximized impact while maintaining operational simplicity.</p>
+
+                <h3><i class="fas fa-credit-card"></i> Donation Channel Performance</h3>
+                <p>Traditional Naira donations (47%) remain our strongest channel, followed by Cashapp (26%), cash donations (19%), and PayPal (8%). This distribution shows strong local support while building international donor base.</p>
+
+                <div class="highlight-box">
+                    <strong>Cost Effectiveness:</strong> At ₃,000 per meal and ₦15,000 per counseling session, we deliver exceptional value. Our programs cost 60% less than similar initiatives while maintaining high quality standards.
+                </div>
+
+                <h3><i class="fas fa-rocket"></i> 2025 Strategic Outlook</h3>
+                <p>With strong financial health and proven program effectiveness, we're positioned to expand our reach. Priority investments include scholarship programs, healthcare infrastructure, and vocational training that align with community-identified needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>4 Umuozu Close, Garki 2, Abuja</p>
+                    <p><a href="tel:08035515287">Phone: 08035515287</a></p>
+                    <p><a href="mailto:contact@fospifoundation.org">Email: contact@fospifoundation.org</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="./about.html">About Us</a></p>
+                    <p><a href="./programs.html">Our Programs</a></p>
+                    <p><a href="./impact.html">Our Impact</a></p>
+                    <p><a href="./contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Programs</h4>
+                    <p><a href="./programs.html">Christmas Feeding Drive</a></p>
+                    <p><a href="./programs.html">Community Health</a></p>
+                    <p><a href="./programs.html">Girls Tech Education</a></p>
+                    <p><a href="./programs.html">Mental Health Advocacy</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Follow our work and stay updated on our latest initiatives.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address" style="padding: 0.5rem; margin-right: 0.5rem; border: none; border-radius: 4px; width: 60%;">
+                        <button id="subscribeBtn" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Foundation for Social Program Initiatives (FOSPI). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Chart configurations
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.font.size = 12;
+        Chart.defaults.color = '#374151';
+
+        // Revenue Sources Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Individual Contributions', 'Partner Contributions', 'Fundraising Events'],
+                datasets: [{
+                    data: [2436754, 1650916, 965330],
+                    backgroundColor: ['#059669', '#34d399', '#f59e0b'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.parsed;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `₦${value.toLocaleString()} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Expense Categories Chart
+        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        new Chart(expenseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Christmas Outreach', 'Bank Setup', 'Salaries'],
+                datasets: [{
+                    data: [4698695, 150000, 110000],
+                    backgroundColor: ['#059669', '#34d399', '#f59e0b'],
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `₦${context.parsed.y.toLocaleString()}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₦' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: '#e5e7eb'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Donation Channels Chart
+        const channelsCtx = document.getElementById('donationChannelsChart').getContext('2d');
+        new Chart(channelsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Naira Donations', 'Cashapp', 'Cash Donations', 'PayPal'],
+                datasets: [
+                    {
+                        label: 'Amount (₦)',
+                        data: [2341118, 1305941, 932815, 378079],
+                        backgroundColor: '#059669',
+                        borderRadius: 8,
+                        borderSkipped: false,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Amount ($)',
+                        data: [1418, 791, 565, 229],
+                        backgroundColor: '#f59e0b',
+                        borderRadius: 8,
+                        borderSkipped: false,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label;
+                                const value = context.parsed.y;
+                                if (label.includes('₦')) {
+                                    return `${label}: ₦${value.toLocaleString()}`;
+                                } else {
+                                    return `${label}: $${value.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₦' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: '#e5e7eb'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter subscription functionality
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        
+        if (subscribeBtn && newsletterEmail) {
+            subscribeBtn.addEventListener('click', () => {
+                const email = newsletterEmail.value.trim();
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing! You will receive updates from FOSPI Foundation.');
+                    newsletterEmail.value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
+
+            newsletterEmail.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    subscribeBtn.click();
+                }
+            });
+        }
+
+        // Auto-update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

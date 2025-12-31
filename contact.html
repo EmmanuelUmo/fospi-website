@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FOSPI Foundation</title>
+    <meta name="description" content="Get in touch with FOSPI Foundation. Contact us for partnerships, volunteer opportunities, or to learn more about our programs across Nigeria.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #f59e0b;
+            --accent-color: #34d399;
+            --tertiary-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f0fdf4;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --green-50: #ecfdf5;
+            --green-100: #d1fae5;
+            --green-600: #059669;
+            --green-700: #047857;
+            --green-800: #065f46;
+            --grey-green: #374151;
+            --hero-green-start: #2d5a3d;
+            --hero-green-mid: #1a3d2e;
+            --hero-navy-dark: #0f1419;
+            --hero-navy-deep: #0a0e13;
+            --error-color: #ef4444;
+            --success-color: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation - Same as other pages */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .donate-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            z-index: 1001;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1002;
+            position: relative;
+            width: 35px;
+            height: 35px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background: var(--primary-color);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+            background: var(--primary-color);
+        }
+
+        .mobile-menu:hover span {
+            background: var(--primary-color);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-dropdown {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: white;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-nav-dropdown.active {
+            right: 0;
+        }
+
+        .mobile-nav-content {
+            padding: 2rem;
+        }
+
+        .mobile-nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-menu li {
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(5) { transition-delay: 0.5s; }
+
+        .mobile-nav-menu a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover::before {
+            width: 20px;
+        }
+
+        .mobile-donate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 6px 20px rgba(30, 119, 18, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-nav-dropdown.active .mobile-donate-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+
+        .mobile-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 119, 18, 0.4);
+        }
+
+        .mobile-nav-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-footer {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+
+        .contact-info {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, 
+                var(--hero-green-start) 0%, 
+                var(--hero-green-mid) 35%, 
+                var(--hero-navy-dark) 75%, 
+                var(--hero-navy-deep) 100%);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 211, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%);
+            opacity: 0.8;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: heroTitleSlide 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: heroTextSlide 1s ease-out 0.3s both;
+        }
+
+        @keyframes heroTitleSlide {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroTextSlide {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Contact Information */
+        .contact-info-section {
+            background: var(--light-color);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(5, 150, 105, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .contact-info-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.3rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .contact-icon.address {
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+        }
+
+        .contact-icon.email {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+        }
+
+        .contact-icon.phone {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .contact-details a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--tertiary-color);
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--error-color);
+            background: #fef2f2;
+        }
+
+        .form-input.success {
+            border-color: var(--success-color);
+            background: #f0fdf4;
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .form-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: #f0fdf4;
+            color: var(--success-color);
+            border: 1px solid #bbf7d0;
+        }
+
+        .form-message.error {
+            background: #fef2f2;
+            color: var(--error-color);
+            border: 1px solid #fecaca;
+        }
+
+        .form-message.show {
+            display: block;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .map-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            height: 500px;
+            position: relative;
+            width: 100%;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .map-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--tertiary-color) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M25,35 C25,25 35,25 35,35 C35,25 45,25 45,35 C45,45 35,55 25,35 Z" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>');
+            animation: floatPattern 20s ease-in-out infinite;
+        }
+
+        @keyframes floatPattern {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-donate-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-nav-dropdown {
+                width: 100%;
+                right: -100%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info-section,
+            .contact-form-section {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-item {
+                padding: 1rem;
+            }
+
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                margin-right: 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-donate-btn {
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info-section,
+            .contact-form-section {
+                padding: 1.5rem;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles */
+        .submit-btn:focus,
+        .donate-btn:focus,
+        .mobile-menu:focus,
+        .form-input:focus {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #047857;
+                --secondary-color: #ff6600;
+                --text-dark: #000000;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Body scroll lock when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <a href="./index.html" class="logo" aria-label="FOSPI Foundation Home">FOSPI</a>
+            
+            <ul class="nav-menu">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./programs.html">Programs</a></li>
+                <li><a href="./impact.html">Impact</a></li>
+                <li><a href="./contact.html" class="active" aria-current="page">Contact</a></li>
+            </ul>
+            
+            <a href="./donate.html" class="donate-btn" aria-label="Donate to FOSPI Foundation">Donate Now</a>
+            
+            <button class="mobile-menu" aria-label="Toggle mobile navigation" aria-expanded="false" type="button">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay"></div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div class="mobile-nav-dropdown">
+            <div class="mobile-nav-content">
+                <ul class="mobile-nav-menu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./programs.html">Our Programs</a></li>
+                    <li><a href="./impact.html">Our Impact</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                
+                <a href="./donate.html" class="mobile-donate-btn">Donate Now</a>
+                
+                <div class="mobile-nav-footer">
+                    <div class="contact-info">
+                        <strong>Contact Us</strong><br>
+                        4 Umuozu Close, Garki 2, Abuja, Nigeria<br>
+                        📞 08035515287<br>
+                        ✉️ contact@fospifoundation.org
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Get in Touch</h1>
+                <p>Ready to make a difference? Connect with FOSPI Foundation for partnerships, volunteer opportunities, or to learn more about how you can support our mission to transform lives across Nigeria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section scroll-animate">
+        <div class="section-container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info-section">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon address">📍</div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>4 Umuozu Close, Garki 2,<br>Abuja, Nigeria</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon email">✉️</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p><a href="mailto:contact@fospifoundation.org">contact@fospifoundation.org</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon phone">📞</div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+2348035515287">08035515287</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Message Us</h2>
+                    <p class="form-subtitle">Send us a message and we'll get back to you as soon as possible.</p>
+                    
+                    <div class="form-message" id="formMessage"></div>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" required>
+                                <div class="error-message" id="firstNameError">Please enter your first name</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" required>
+                                <div class="error-message" id="lastNameError">Please enter your last name</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                                <div class="error-message" id="emailError">Please enter a valid email address</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input">
+                                <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                            <div class="error-message" id="subjectError">Please enter a subject</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" class="form-input" rows="5" required placeholder="Tell us how we can help you..."></textarea>
+                            <div class="error-message" id="messageError">Please enter your message</div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">Submit</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section scroll-animate">
+        <div class="section-container">
+            <h2 class="section-title">Find Us</h2>
+            <p class="section-subtitle">Located in the heart of Abuja, Nigeria</p>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.486942514994!2d7.492878610500731!3d9.019265891004332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0c712d1e000f%3A0x6c136bfd8ada27d8!2s4%20Umuozu%20St%2C%20Garki%2C%20Abuja%20900110%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1752224287666!5m2!1sen!2sng" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section scroll-animate">
+        <div class="section-container">
+            <div class="cta-content">
+                <h2>GIVE US A HAND</h2>
+                <p>Support us and change the course of a life today! Your contribution helps us expand our life-changing programs to reach more communities in need across Nigeria.</p>
+                <a href="./donate.html" class="cta-donate-btn">Donate</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>4 Umuozu Close, Garki 2, Abuja</p>
+                    <p><a href="tel:08035515287">Phone: 08035515287</a></p>
+                    <p><a href="mailto:contact@fospifoundation.org">Email: contact@fospifoundation.org</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="./about.html">About Us</a></p>
+                    <p><a href="./programs.html">Our Programs</a></p>
+                    <p><a href="./impact.html">Our Impact</a></p>
+                    <p><a href="./contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Programs</h4>
+                    <p><a href="./programs.html">Christmas Feeding Drive</a></p>
+                    <p><a href="./programs.html">Community Health</a></p>
+                    <p><a href="./programs.html">Girls Tech Education</a></p>
+                    <p><a href="./programs.html">Mental Health Advocacy</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Follow our work and stay updated on our latest initiatives.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address" style="padding: 0.5rem; margin-right: 0.5rem; border: none; border-radius: 4px; width: 60%;">
+                        <button id="subscribeBtn" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Foundation for Social Program Initiatives (FOSPI). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navOverlay = document.querySelector('.mobile-nav-overlay');
+        const navDropdown = document.querySelector('.mobile-nav-dropdown');
+        const body = document.body;
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.classList.add('active');
+                navOverlay.classList.add('active');
+                navDropdown.classList.add('active');
+                body.classList.add('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'true');
+            } else {
+                mobileMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
+                navDropdown.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        mobileMenu.addEventListener('click', toggleMobileMenu);
+        navOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking on navigation links
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu a, .mobile-donate-btn');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Prevent menu from staying open on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Form validation and submission
+        class ContactForm {
+            constructor() {
+                this.form = document.getElementById('contactForm');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.formMessage = document.getElementById('formMessage');
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.addRealTimeValidation();
+            }
+
+            addRealTimeValidation() {
+                const inputs = this.form.querySelectorAll('.form-input');
+                inputs.forEach(input => {
+                    input.addEventListener('blur', () => this.validateField(input));
+                    input.addEventListener('input', () => this.clearFieldError(input));
+                });
+            }
+
+            validateField(field) {
+                const value = field.value.trim();
+                const fieldName = field.name;
+                let isValid = true;
+                let errorMessage = '';
+
+                // Reset field state
+                field.classList.remove('error', 'success');
+                this.hideFieldError(fieldName);
+
+                // Required field check
+                if (field.hasAttribute('required') && !value) {
+                    errorMessage = `Please enter your ${fieldName.replace(/([A-Z])/g, ' $1').toLowerCase()}`;
+                    isValid = false;
+                }
+
+                // Specific validation rules
+                switch (fieldName) {
+                    case 'email':
+                        if (value && !this.isValidEmail(value)) {
+                            errorMessage = 'Please enter a valid email address';
+                            isValid = false;
+                        }
+                        break;
+                    case 'phone':
+                        if (value && !this.isValidPhone(value)) {
+                            errorMessage = 'Please enter a valid phone number';
+                            isValid = false;
+                        }
+                        break;
+                    case 'firstName':
+                    case 'lastName':
+                        if (value && value.length < 2) {
+                            errorMessage = 'Name must be at least 2 characters long';
+                            isValid = false;
+                        }
+                        break;
+                    case 'subject':
+                        if (value && value.length < 3) {
+                            errorMessage = 'Subject must be at least 3 characters long';
+                            isValid = false;
+                        }
+                        break;
+                    case 'message':
+                        if (value && value.length < 10) {
+                            errorMessage = 'Message must be at least 10 characters long';
+                            isValid = false;
+                        }
+                        break;
+                }
+
+                if (!isValid) {
+                    field.classList.add('error');
+                    this.showFieldError(fieldName, errorMessage);
+                } else if (value) {
+                    field.classList.add('success');
+                }
+
+                return isValid;
+            }
+
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            isValidPhone(phone) {
+                const phoneRegex = /^[\+]?[\d\s\-\(\)]{8,}$/;
+                return phoneRegex.test(phone);
+            }
+
+            showFieldError(fieldName, message) {
+                const errorElement = document.getElementById(`${fieldName}Error`);
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('show');
+                }
+            }
+
+            hideFieldError(fieldName) {
+                const errorElement = document.getElementById(`${fieldName}Error`);
+                if (errorElement) {
+                    errorElement.classList.remove('show');
+                }
+            }
+
+            clearFieldError(field) {
+                if (field.classList.contains('error')) {
+                    field.classList.remove('error');
+                    this.hideFieldError(field.name);
+                }
+            }
+
+            validateForm() {
+                const inputs = this.form.querySelectorAll('.form-input[required]');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (!this.validateField(input)) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
+
+            showMessage(message, type) {
+                this.formMessage.textContent = message;
+                this.formMessage.className = `form-message ${type} show`;
+                
+                // Scroll to message
+                this.formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    this.formMessage.classList.remove('show');
+                }, 5000);
+            }
+
+            setLoading(loading) {
+                if (loading) {
+                    this.submitBtn.classList.add('loading');
+                    this.submitBtn.disabled = true;
+                    this.submitBtn.querySelector('.btn-text').textContent = 'Sending...';
+                } else {
+                    this.submitBtn.classList.remove('loading');
+                    this.submitBtn.disabled = false;
+                    this.submitBtn.querySelector('.btn-text').textContent = 'Submit';
+                }
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                // Validate form
+                if (!this.validateForm()) {
+                    this.showMessage('Please correct the errors above and try again.', 'error');
+                    return;
+                }
+
+                // Set loading state
+                this.setLoading(true);
+
+                // Get form data
+                const formData = new FormData(this.form);
+                const data = Object.fromEntries(formData.entries());
+
+                try {
+                    // Simulate API call (replace with your actual endpoint)
+                    await this.simulateFormSubmission(data);
+                    
+                    this.showMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
+                    this.form.reset();
+                    
+                    // Clear field states
+                    this.form.querySelectorAll('.form-input').forEach(input => {
+                        input.classList.remove('error', 'success');
+                    });
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    this.showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            async simulateFormSubmission(data) {
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Log form data (replace with actual API call)
+                console.log('Form submitted with data:', data);
+                
+                // For production, replace with:
+                // const response = await fetch('/api/contact', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(data)
+                // });
+                // 
+                // if (!response.ok) {
+                //     throw new Error('Network response was not ok');
+                // }
+                // 
+                // return response.json();
+            }
+        }
+
+        // Initialize contact form
+        document.addEventListener('DOMContentLoaded', () => {
+            new ContactForm();
+        });
+
+        // Newsletter subscription functionality
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        
+        if (subscribeBtn && newsletterEmail) {
+            subscribeBtn.addEventListener('click', () => {
+                const email = newsletterEmail.value.trim();
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing! You will receive updates from FOSPI Foundation.');
+                    newsletterEmail.value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
+
+            newsletterEmail.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    subscribeBtn.click();
+                }
+            });
+        }
+
+        // Auto-update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced scroll progress indicator
+        const scrollProgress = document.createElement('div');
+        scrollProgress.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 9999;
+            transition: width 0.3s ease;
+        `;
+        document.body.appendChild(scrollProgress);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Add ripple effect to buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Apply ripple effect to buttons
+        document.querySelectorAll('.submit-btn, .mobile-donate-btn, .cta-donate-btn').forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Add ripple effect styles
+        const rippleStyles = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 600ms linear;
+                background-color: rgba(255, 255, 255, 0.6);
+                pointer-events: none;
+            }
+            
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .submit-btn, .mobile-donate-btn, .cta-donate-btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = rippleStyles;
+        document.head.appendChild(styleSheet);
+
+        // Accessibility improvements
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('using-keyboard');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('using-keyboard');
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const loadTime = performance.now();
+            if (loadTime > 3000) {
+                console.warn('Page load time exceeded 3 seconds');
+            }
+        });
+    </script>
+</body>
+</html>

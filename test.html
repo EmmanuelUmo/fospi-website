@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSPI Foundation - Building Hope Where It's Needed Most</title>
+    <meta name="description" content="Empowering underserved communities in Nigeria through evidence-based programs in education, mental health, and poverty alleviation.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e7712;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --danger-color: #ef4444;
+            --hero-green-start: #2d5a3d;
+            --hero-green-mid: #1a3d2e;
+            --hero-navy-dark: #0f1419;
+            --hero-navy-deep: #0a0e13;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .donate-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            z-index: 1001;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1002;
+            position: relative;
+            width: 35px;
+            height: 35px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
+        }
+
+        .mobile-menu span:nth-child(1) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu span:nth-child(2) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu span:nth-child(3) {
+            transform: translateY(0);
+        }
+
+        .mobile-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background: var(--primary-color);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+            background: var(--primary-color);
+        }
+
+        /* Hover effect for mobile menu */
+        .mobile-menu:hover span {
+            background: var(--primary-color);
+        }
+
+        .mobile-menu:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Navigation Dropdown */
+        .mobile-nav-dropdown {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: white;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-nav-dropdown.active {
+            right: 0;
+        }
+
+        .mobile-nav-content {
+            padding: 2rem;
+        }
+
+        .mobile-nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-menu li {
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-dropdown.active .mobile-nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+
+        .mobile-nav-menu a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover::before {
+            width: 20px;
+        }
+
+        .mobile-donate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 6px 20px rgba(30, 119, 18, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-nav-dropdown.active .mobile-donate-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+
+        .mobile-donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 119, 18, 0.4);
+        }
+
+        .mobile-nav-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown.active .mobile-nav-footer {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .contact-info strong {
+            color: var(--text-dark);
+        }
+
+        /* Hero Section with Video Background */
+        .hero {
+            background: linear-gradient(135deg, 
+                var(--hero-green-start) 0%, 
+                var(--hero-green-mid) 35%, 
+                var(--hero-navy-dark) 75%, 
+                var(--hero-navy-deep) 100%);
+            height: 120vh; /* Increased height for better video display */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Account for fixed header */
+        }
+
+        /* FOSPI Video Background Component */
+        .fospi-video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0; /* Start hidden, will be shown when video is loaded */
+            transition: opacity 1s ease-in-out;
+        }
+
+        .fospi-video-background.loaded {
+            opacity: 1;
+        }
+
+        .fospi-hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.7) contrast(1.1);
+        }
+
+        .fospi-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.3) 0%, 
+                rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Enable video on mobile with optimizations */
+        @media (max-width: 768px) {
+            .fospi-hero-video {
+                filter: brightness(0.8) contrast(1.2);
+            }
+            
+            .fospi-video-overlay {
+                background: linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.4) 0%, 
+                    rgba(0, 0, 0, 0.5) 100%);
+            }
+        }
+
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .fospi-hero-video {
+                display: none;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.05"/><circle cx="80" cy="80" r="1" fill="white" opacity="0.08"/><circle cx="40" cy="60" r="1" fill="white" opacity="0.03"/><circle cx="60" cy="25" r="1" fill="rgba(52,211,153,0.1)" opacity="0.6"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.7;
+            z-index: 3;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(52, 211, 153, 0.05) 50%,
+                transparent 70%
+            );
+            animation: shimmer 8s ease-in-out infinite;
+            z-index: 4;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+            50% { opacity: 0.1; transform: translateX(100%); }
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 5; /* Above video and overlays */
+            height: calc(120vh - 80px); /* Full height minus header */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideInLeft 1s ease-out 0.4s both;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: slideInRight 1s ease-out 0.6s both;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                0 2px 8px rgba(52, 211, 153, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: block;
+            text-shadow: 0 2px 8px rgba(30, 119, 18, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Stats Section - New section for hero visual content */
+        .stats-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light-color) 0%, #ffffff 100%);
+            width: 100%;
+        }
+
+        .stats-container {
+            width: 100%;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.12),
+                0 8px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 1000px;
+        }
+        .impact-section {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .impact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .impact-icon {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .impact-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .impact-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .impact-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Annual Report Section */
+        .report-section {
+            padding: 6rem 0;
+            background: var(--dark-color);
+            color: white;
+            position: relative;
+        }
+
+        .report-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .report-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-highlights {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .report-highlights li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .report-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .report-visual {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .big-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Action Section */
+        .action-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #059669 100%);
+            text-align: center;
+        }
+
+        .action-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .action-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+
+  /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-nav-dropdown {
+                width: 100%;
+                right: -100%;
+            }
+
+            .hero {
+                height: 100vh; /* Adjust height for mobile */
+                padding-top: 80px;
+                padding-bottom: 2rem;
+            }
+
+            .hero-container {
+                height: calc(100vh - 80px);
+                padding: 2rem 1rem;
+                max-width: 90%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .hero-cta .btn-primary,
+            .hero-cta .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                padding: 1rem 2rem;
+            }
+
+            .stats-section {
+                padding: 3rem 0;
+            }
+
+            .stats-container {
+                padding: 0 1rem;
+            }
+
+            .stats-card {
+                padding: 2rem 1.5rem;
+                max-width: 100%;
+            }
+
+            .stats-grid {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                width: 100%;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            .report-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .impact-section {
+                padding: 4rem 0;
+            }
+
+            .report-section {
+                padding: 4rem 0;
+            }
+
+            .action-section {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-container {
+                padding: 1.5rem 1rem 2rem 1rem;
+                gap: 2rem;
+            }
+
+            .stats-card {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .hero-cta .btn-primary,
+            .hero-cta .btn-secondary {
+                width: 90%;
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles for accessibility */
+        .btn-primary:focus,
+        .btn-secondary:focus,
+        .donate-btn:focus,
+        .mobile-menu:focus {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #056110;
+                --secondary-color: #ff6600;
+                --text-dark: #000000;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Body scroll lock when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <a href="./index.html" class="logo" aria-label="FOSPI Foundation Home">FOSPI</a>
+            
+            <ul class="nav-menu">
+                <li><a href="./about.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./programs.html">Programs</a></li>
+                <li><a href="./impact.html">Impact</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+            
+            <a href="./donate.html" class="donate-btn" aria-label="Donate to FOSPI Foundation">Donate Now</a>
+            
+            <button class="mobile-menu" aria-label="Toggle mobile navigation" aria-expanded="false" type="button">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay"></div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div class="mobile-nav-dropdown">
+            <div class="mobile-nav-content">
+                <ul class="mobile-nav-menu">
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./programs.html">Our Programs</a></li>
+                    <li><a href="./impact.html">Our Impact</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                
+                <a href="./donate.html" class="mobile-donate-btn">Donate Now</a>
+                
+                <div class="mobile-nav-footer">
+                    <div class="contact-info">
+                        <strong>Contact Us</strong><br>
+                        4 Umuozu Close, Garki 2, Abuja<br>
+                        📞 08035515287<br>
+                        ✉️ contact@fospifoundation.org
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <!-- FOSPI Video Background Component -->
+        <!-- TO ADD YOUR VIDEO: Replace "YOUR_VIDEO_FILE.mp4" with your actual video file path -->
+        <div class="fospi-video-background" id="heroVideoBackground">
+            <video autoplay muted loop playsinline class="fospi-hero-video" id="heroVideo">
+                <source src="images/video/0909 (3)(1).mp4" type="video/mp4">
+                
+                <!-- Fallback for browsers that don't support video -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="fospi-video-overlay"></div>
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Building Hope Where It's Needed Most</h1>
+                <p>Empowering underserved communities in Nigeria through evidence-based programs in education, mental health, and poverty alleviation.</p>
+                <div class="hero-cta">
+                    <a href="./donate.html" class="btn-primary">Support Our Mission</a>
+                    <a href="./impact.html" class="btn-secondary">See Our Impact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="400" data-suffix="+">0</span>
+                        <span class="stat-label">Lives Transformed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="5000" data-suffix="+" data-format="comma">0</span>
+                        <span class="stat-label">Meals Provided</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="125">0</span>
+                        <span class="stat-label">Counseling Sessions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10" data-prefix="₦" data-suffix="M+">0</span>
+                        <span class="stat-label">Funds Raised</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section scroll-animate" id="impact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Our Focus Areas</h2>
+                <p class="section-subtitle">We implement data-driven, evidence-based programs across five critical areas to create lasting change in underserved communities.</p>
+            </div>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="./images/video/m 71.jpg" alt="Education Program">
+                    </div>
+                    <h3>Education</h3>
+                    <p>Increasing access to quality education for marginalized communities through scholarships, school rehabilitation, and transportation funding.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/Test/IMG_20241227_105134_624.jpg" alt="Mental Health Support">
+                    </div>
+                    <h3>Mental Health</h3>
+                    <p>Advocating for mental health awareness and providing access to affordable counseling services and support systems.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/Test/m 68.webp" alt="Gender Equity Programs">
+                    </div>
+                    <h3>Gender Equity</h3>
+                    <p>Promoting gender equality through vocational training, economic opportunities for women, and leadership development programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/Test/IMG_0501.webp" alt="Health and Wellbeing">
+                    </div>
+                    <h3>Health & Wellbeing</h3>
+                    <p>Improving health outcomes through healthcare facility support, medical supplies, and community health education programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/Test/photo_6010147801620661200_y.jpg" alt="Poverty and Hunger Relief">
+                    </div>
+                    <h3>Poverty & Hunger</h3>
+                    <p>Alleviating poverty through emergency food relief, micro-loans for women, and sustainable livelihood programs.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <img src="images/Test/IMG_20241227_105200_772.jpg" alt="Research and Evaluation">
+                    </div>
+                    <h3>Research & Evaluation</h3>
+                    <p>Conducting empirical research and needs assessments to ensure our interventions are effective and evidence-based.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Annual Report Section -->
+    <section class="report-section scroll-animate">
+        <div class="section-container">
+            <div class="report-container">
+                <div class="report-content">
+                    <h2>2024 Annual Impact Report</h2>
+                    <p>Our evidence-based approach delivered measurable results across rural Nigerian communities, creating lasting change where it's needed most.</p>
+                    
+                    <ul class="report-highlights">
+                        <li>2,000+ free meals served during Christmas Drive</li>
+                        <li>125 free counseling sessions provided</li>
+                        <li>Essential materials distributed to hundreds</li>
+                        <li>30+ community interviews and assessments conducted</li>
+                        <li>100% of donations directly funded outreach activities</li>
+                    </ul>
+                    
+                    <a href="#report" class="btn-primary">Download Full Report</a>
+                </div>
+                
+                <div class="report-visual">
+                    <span class="big-number">100%</span>
+                    <p>Transparency Promise</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Every naira donated goes directly to our programs. No administrative overhead fees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="action-section scroll-animate" id="donate">
+        <div class="section-container">
+            <h2>Transform Lives Today</h2>
+            <p>Your support creates immediate impact. Join us in building hope where it's needed most across Nigeria's underserved communities.</p>
+            
+            <div class="action-buttons">
+                <a href="./donate.html" class="btn-primary" style="background: white; color: var(--accent-color);">Donate Now</a>
+                <a href="#volunteer" class="btn-secondary">Become a Volunteer</a>
+                <a href="#partner" class="btn-secondary">Partner With Us</a>
+            </div>
+            
+            <div style="margin-top: 3rem; opacity: 0.9;">
+                <p><strong>Quick Impact:</strong> ₹9,000 = 3 meals | ₹25,000 = 8 meals + 1 counseling session</p>
+            </div>
+        </div>
+    </section>
+
+
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>4 Umuozu Close, Garki 2, Abuja</p>
+                    <p><a href="tel:08035515287">Phone: 08035515287</a></p>
+                    <p><a href="mailto:contact@fospifoundation.org">Email: contact@fospifoundation.org</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="./about.html">About Us</a></p>
+                    <p><a href="./programs.html">Our Programs</a></p>
+                    <p><a href="./impact.html">Our Impact</a></p>
+                    <p><a href="./contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Programs</h4>
+                    <p><a href="./programs.html">Christmas Feeding Drive</a></p>
+                    <p><a href="./programs.html">Community Health</a></p>
+                    <p><a href="./programs.html">Girls Tech Education</a></p>
+                    <p><a href="./programs.html">Mental Health Advocacy</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Follow our work and stay updated on our latest initiatives.</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address" style="padding: 0.5rem; margin-right: 0.5rem; border: none; border-radius: 4px; width: 60%;">
+                        <button id="subscribeBtn" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Foundation for Social Program Initiatives (FOSPI). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FOSPI Video Background JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.fospi-hero-video');
+            const videoBackground = document.querySelector('.fospi-video-background');
+            
+            if (video && videoBackground) {
+                // Force video to load and play
+                video.load();
+                
+                // Show video background when loaded
+                video.addEventListener('loadeddata', function() {
+                    videoBackground.classList.add('loaded');
+                });
+
+                // Enhanced mobile video support
+                video.addEventListener('canplay', function() {
+                    // Try to play the video
+                    const playPromise = video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(function() {
+                            // Video started playing successfully
+                            videoBackground.classList.add('loaded');
+                        }).catch(function(error) {
+                            console.log('Video autoplay prevented:', error);
+                            // Show a play button or try user interaction
+                            videoBackground.classList.add('loaded'); // Still show the video element
+                        });
+                    }
+                });
+
+                // Mobile optimization - try to play on user interaction
+                function attemptVideoPlay() {
+                    if (video.paused) {
+                        video.play().catch(function(error) {
+                            console.log('Video play failed:', error);
+                        });
+                    }
+                }
+
+                // Try to play video on any user interaction for mobile
+                document.addEventListener('touchstart', attemptVideoPlay, { once: true });
+                document.addEventListener('click', attemptVideoPlay, { once: true });
+                
+                // Pause video when not visible (performance optimization)
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            video.play().catch(function(error) {
+                                console.log('Video play failed:', error);
+                            });
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(video);
+
+                // Handle video errors
+                video.addEventListener('error', function(e) {
+                    console.log('Video error:', e);
+                    // Don't hide the background, just log the error
+                    videoBackground.classList.add('loaded');
+                });
+
+                // Ensure video loops properly
+                video.addEventListener('ended', function() {
+                    video.currentTime = 0;
+                    video.play().catch(function(error) {
+                        console.log('Video restart failed:', error);
+                    });
+                });
+            }
+        });
+
+        // Mobile menu functionality with enhanced animations
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navOverlay = document.querySelector('.mobile-nav-overlay');
+        const navDropdown = document.querySelector('.mobile-nav-dropdown');
+        const body = document.body;
+        let isMenuOpen = false;
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                // Open menu
+                mobileMenu.classList.add('active');
+                navOverlay.classList.add('active');
+                navDropdown.classList.add('active');
+                body.classList.add('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'true');
+            } else {
+                // Close menu
+                mobileMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
+                navDropdown.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Event listeners
+        mobileMenu.addEventListener('click', toggleMobileMenu);
+        navOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking on navigation links
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu a, .mobile-donate-btn');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Prevent menu from staying open on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Accessibility: Focus management
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('using-keyboard');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('using-keyboard');
+        });
+
+        // Focus trap for mobile menu
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            lastFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            firstFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Apply focus trap to mobile menu when open
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    if (navDropdown.classList.contains('active')) {
+                        trapFocus(navDropdown);
+                        // Focus first menu item
+                        setTimeout(() => {
+                            const firstMenuItem = navDropdown.querySelector('.mobile-nav-menu a');
+                            if (firstMenuItem) firstMenuItem.focus();
+                        }, 100);
+                    }
+                }
+            });
+        });
+
+        observer.observe(navDropdown, { attributes: true });
+
+        // Preload critical resources
+        const preloadLink = document.createElement('link');
+        preloadLink.rel = 'preload';
+        preloadLink.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>';
+        preloadLink.as = 'image';
+        document.head.appendChild(preloadLink);
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const loadTime = performance.now();
+            if (loadTime > 3000) {
+                console.warn('Page load time exceeded 3 seconds');
+            }
+        });
+
+        // Add ripple effect to buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Apply ripple effect to buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary, .mobile-donate-btn').forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Add ripple effect styles dynamically
+        const rippleStyles = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 600ms linear;
+                background-color: rgba(255, 255, 255, 0.6);
+                pointer-events: none;
+            }
+            
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .btn-primary, .btn-secondary, .mobile-donate-btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = rippleStyles;
+        document.head.appendChild(styleSheet);
+
+        // Enhanced scroll progress indicator
+        const scrollProgress = document.createElement('div');
+        scrollProgress.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 9999;
+            transition: width 0.3s ease;
+        `;
+        document.body.appendChild(scrollProgress);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Intersection Observer for enhanced animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer2 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.impact-card, .stat-item').forEach(el => {
+            observer2.observe(el);
+        });
+
+        // Stats Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const startTime = performance.now();
+            const prefix = element.dataset.prefix || '';
+            const suffix = element.dataset.suffix || '';
+            const useComma = element.dataset.format === 'comma';
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const currentValue = Math.floor(start + (target - start) * easeOutQuart);
+                
+                // Format number based on data attributes
+                let displayValue = currentValue.toString();
+                if (useComma && currentValue >= 1000) {
+                    displayValue = currentValue.toLocaleString();
+                }
+                
+                element.textContent = prefix + displayValue + suffix;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Ensure final value is exact
+                    let finalValue = target.toString();
+                    if (useComma && target >= 1000) {
+                        finalValue = target.toLocaleString();
+                    }
+                    element.textContent = prefix + finalValue + suffix;
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Initialize stats counter when section comes into view
+        function initStatsCounter() {
+            const statsSection = document.querySelector('.stats-section');
+            const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+            
+            console.log('Stats section:', statsSection);
+            console.log('Stat numbers:', statNumbers);
+            
+            if (!statsSection || !statNumbers.length) {
+                console.log('Stats section or numbers not found');
+                return;
+            }
+            
+            let hasAnimated = false;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        console.log('Stats section is visible, starting animation');
+                        hasAnimated = true;
+                        
+                        // Add stagger delay for each counter
+                        statNumbers.forEach((counter, index) => {
+                            setTimeout(() => {
+                                const target = parseInt(counter.dataset.target);
+                                console.log(`Animating counter ${index} to ${target}`);
+                                animateCounter(counter, target);
+                            }, index * 300); // 300ms delay between each counter
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            observer.observe(statsSection);
+        }
+
+        // Initialize stats counter after DOM is loaded
+        setTimeout(initStatsCounter, 1000); // Small delay to ensure everything is ready
+
+        // Newsletter subscription functionality
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        
+        if (subscribeBtn && newsletterEmail) {
+            subscribeBtn.addEventListener('click', () => {
+                const email = newsletterEmail.value.trim();
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing! You will receive updates from FOSPI Foundation.');
+                    newsletterEmail.value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
+
+            newsletterEmail.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    subscribeBtn.click();
+                }
+            });
+        }
+
+        // Auto-update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
