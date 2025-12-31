@@ -361,10 +361,11 @@
             transform: translate(-50%, -50%);
             min-width: 100%;
             min-height: 100%;
-            width: auto;
-            height: auto;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0.7; /* Reduced video opacity for better text visibility */
+            z-index: 1;
         }
 
 
@@ -1473,14 +1474,11 @@
                 muted 
                 loop 
                 playsinline 
-                preload="metadata"
+                preload="auto"
                 aria-hidden="true" 
-                poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
                 id="hero-video"
             >
                 <!-- Add your video sources here -->
-                <!-- Example: <source src="your-video.mp4" type="video/mp4"> -->
-                <!-- Example: <source src="your-video.webm" type="video/webm"> -->
                 <source src="./images/video/landing_page_video.mp4" type="video/mp4">
                 <!-- Add fallback text for browsers that don't support video -->
                 Your browser does not support the video tag.
@@ -1945,22 +1943,7 @@
 </footer>
 
 <script>
-    // Debug: Check if image is loading
-    console.log('Debug: Checking action section background image...');
-    
-    // Test the image path
-    const testImage = new Image();
-    testImage.src = 'images/IMG_2037.jpg';
-    testImage.onload = function() {
-        console.log('✓ Background image loaded successfully:', this.src);
-    };
-    testImage.onerror = function() {
-        console.error('✗ Background image failed to load:', this.src);
-        console.log('Please check:');
-        console.log('1. File exists at: images/IMG_2037.jpg');
-        console.log('2. File path is correct relative to HTML file');
-        console.log('3. File has proper permissions');
-    };
+    // Debug: Check if image is loading (removed - not needed)
 
     // Mobile menu functionality with enhanced animations
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -2249,8 +2232,27 @@ partnerInquiry.addEventListener('submit', function(e) {
     // Video background optimization
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
+        // Log video loading status
+        console.log('Video element found:', heroVideo);
+        
+        // Check if video source loads
+        heroVideo.addEventListener('loadstart', function() {
+            console.log('Video loading started');
+        });
+        
+        heroVideo.addEventListener('loadeddata', function() {
+            console.log('Video data loaded');
+        });
+        
+        heroVideo.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            console.error('Video error code:', heroVideo.error ? heroVideo.error.code : 'unknown');
+            console.error('Video source:', heroVideo.querySelector('source')?.src);
+        });
+        
         // Ensure video plays correctly
         heroVideo.addEventListener('loadedmetadata', function() {
+            console.log('Video metadata loaded, attempting to play');
             this.play().catch(e => {
                 console.log('Video autoplay prevented:', e);
             });
@@ -2258,7 +2260,7 @@ partnerInquiry.addEventListener('submit', function(e) {
 
         // Fallback for browsers that block autoplay
         const playVideo = () => {
-            if (heroVideo.paused) {
+            if (heroVideo && heroVideo.paused) {
                 heroVideo.play().catch(e => {
                     console.log('Video play failed:', e);
                 });
@@ -2266,9 +2268,18 @@ partnerInquiry.addEventListener('submit', function(e) {
         };
 
         // Try to play on user interaction
-        document.addEventListener('click', playVideo);
-        document.addEventListener('touchstart', playVideo);
-        document.addEventListener('scroll', playVideo);
+        document.addEventListener('click', playVideo, { once: true });
+        document.addEventListener('touchstart', playVideo, { once: true });
+        document.addEventListener('scroll', playVideo, { once: true });
+        
+        // Force play after a short delay
+        setTimeout(() => {
+            if (heroVideo.paused) {
+                playVideo();
+            }
+        }, 500);
+    } else {
+        console.error('Video element not found!');
     }
 
     // ==================== NEWS SYSTEM WITH REAL IMAGES ====================
@@ -2592,13 +2603,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==================== END NEWS SYSTEM ====================
 
-    // Initialize news on page load - UPDATED to use fetchHybridNews
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchHybridNews(); // CHANGED FROM fetchNews() to fetchHybridNews()
-        
-        // Auto-refresh news every 30 minutes
-        setInterval(fetchHybridNews, 30 * 60 * 1000);
-    });
+    // Note: News initialization is handled above in the REAL-TIME NEWS SYSTEM section
 
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
