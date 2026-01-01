@@ -57,12 +57,12 @@ FOSPI Foundation needed a digital presence that could:
 ### Root Cause Analysis
 
 **Before**: The organization lacked a cohesive digital strategy, resulting in:
-- ❌ Inconsistent brand presentation
-- ❌ Poor mobile experience (60%+ of users are mobile)
-- ❌ No clear donation pathway
-- ❌ Limited impact visualization
-- ❌ Manual volunteer recruitment processes
-- ❌ Static, non-engaging content
+- Inconsistent brand presentation
+- Poor mobile experience (60%+ of users are mobile)
+- No clear donation pathway
+- Limited impact visualization
+- Manual volunteer recruitment processes
+- Static, non-engaging content
 
 **Impact**: Low donor conversion, limited volunteer engagement, reduced organizational credibility, and missed opportunities for growth.
 
@@ -73,12 +73,12 @@ FOSPI Foundation needed a digital presence that could:
 ### Solution Overview
 
 A modern, fully-responsive website platform that:
-- ✅ **Engages** through compelling visual storytelling (video backgrounds, impact videos, before/after comparisons)
-- ✅ **Converts** with optimized donation pathways and clear CTAs
-- ✅ **Informs** through transparent reporting and detailed program information
-- ✅ **Connects** via multiple engagement channels (forms, newsletter, contact)
-- ✅ **Performs** with fast loading times and smooth animations
-- ✅ **Includes** through accessibility-first design
+- **Engages** through compelling visual storytelling (video backgrounds, impact videos, before/after comparisons)
+- **Converts** with optimized donation pathways and clear CTAs
+- **Informs** through transparent reporting and detailed program information
+- **Connects** via multiple engagement channels (forms, newsletter, contact)
+- **Performs** with fast loading times and smooth animations
+- **Includes** through accessibility-first design
 
 ### Solution Architecture
 
